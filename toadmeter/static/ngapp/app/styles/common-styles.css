@@ -1,0 +1,71 @@
+.md-button .fa {
+    font-size: 1.4rem;
+}
+
+.md-fab .fa {
+    font-size: 2rem;
+}
+
+
+.round {
+    border-radius: 100px;
+}
+
+li[md-ink-ripple] {
+    position: relative;
+}
+
+
+.md-fab.rotate:hover .fa-box {
+    transform: rotate(180deg);
+     transition-duration: 0.5s;
+}
+
+
+md-input-container > .fa-box {
+    left: 2px;
+    position: absolute;
+    bottom: 30px;
+    font-size: 1.6rem;
+    text-align: center;
+    width: 2rem;
+}
+
+md-input-container > .fa-box + label,
+md-input-container > .fa-box + label + input {
+    margin-left: 56px;
+    margin-left: 40px;
+}
+
+button .spinner {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+button .spinner .fa {
+    line-height: 150%;
+}
+
+.lb-table {
+    border-collapse: collapse;
+}
+.lb-table th, .lb-table thead {
+    font-weight: bold;
+    background-color: rgba(96, 125, 139, 0.4);
+}
+.lb-table td, .lb-table th {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #d3d3d3;
+}
+.lb-table tbody td {
+}
+.lb-table .odd {
+    background-color: rgba(96, 125, 139, 0.05);
+}
+.lb-table md-select {
+    margin: 0;
+}

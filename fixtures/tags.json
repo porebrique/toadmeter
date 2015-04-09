@@ -1,0 +1,42 @@
+[
+{
+    "pk": 1, 
+    "model": "transactions.tag", 
+    "fields": {
+        "owner": 1, 
+        "text": "booze", 
+        "type": "out",
+        "inevitable": false
+    }
+},
+{
+    "pk": 2, 
+    "model": "transactions.tag", 
+    "fields": {
+        "owner": 1, 
+        "text": "flat rent", 
+        "type": "out",
+        "inevitable": true
+    }
+},
+{
+    "pk": 3, 
+    "model": "transactions.tag", 
+    "fields": {
+        "owner": 1, 
+        "text": "food", 
+        "type": "out",
+        "inevitable": false
+    }
+},
+{
+    "pk": 4, 
+    "model": "transactions.tag", 
+    "fields": {
+        "owner": 1, 
+        "text": "clothes", 
+        "type": "out",
+        "inevitable": false
+    }
+}
+]

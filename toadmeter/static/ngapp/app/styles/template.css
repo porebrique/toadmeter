@@ -1,0 +1,41 @@
+.sidebar-switch {
+    margin: 0 10px 0 -6px;
+}
+
+
+.site-sidenav .navlinks {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.site-sidenav .navlinks li {
+    list-style-type: none;
+}
+
+
+.site-sidenav .navlinks li .fa {
+    font-size: 1.2rem;
+}
+
+.site-sidenav .navlinks li .fa-money {
+    font-size: 1.6rem;
+}
+.site-sidenav .navlinks a {
+    padding: 1em 2em;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid #D3D3D3;
+}
+
+.site-sidenav .navlinks a:hover {
+    
+    background: #F4F4F4;
+}
+
+.site-sidenav .navlinks .active {
+/*    color: #607D8B;*/
+    background: rgba(96, 125, 140, 0.1);
+}
+

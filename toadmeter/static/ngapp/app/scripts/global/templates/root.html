@@ -1,0 +1,42 @@
+<md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" class="site-sidenav md-sidenav-left md-whiteframe-z2">
+    <md-toolbar class="md-default-theme md-hue-0">
+        <h1 class="md-toolbar-tools">Longbox</h1>            
+    </md-toolbar>
+     <md-content>
+        <ul class="navlinks">
+            <li md-ink-ripple><a ui-sref="public.home" ui-sref-active="active">Home</a></li>
+<!--            <li md-ink-ripple><a ui-sref="public.login" ui-sref-active="active">Login</a></li>-->
+<!--            <li md-ink-ripple><a ui-sref="public.reg" ui-sref-active="active">Registration</a></li>-->
+            <li md-ink-ripple><a ui-sref="secure.incomes" ui-sref-active="active"><span class="fa fa-plus"/> <span class="fa fa-money"/>  </a></li>
+            <li md-ink-ripple><a ui-sref="secure.costs" ui-sref-active="active"><span class="fa fa-minus"/> <span class="fa fa-money"/>  </a></li>
+<!--            <li md-ink-ripple><a ui-sref="secure.costs" ui-sref-active="active">Costs</a></li>-->
+<!--            <li md-ink-ripple><a ui-sref="secure.stats" ui-sref-active="active">Statistics</a></li>-->
+                
+            
+                <li md-ink-ripple><a ui-sref="public.userlist" ui-sref-active="active">Userlist</a></li>
+            
+                <li md-ink-ripple><a href="#" auth-logout>Exit</a></li>
+            
+         </ul>
+    </md-content>         
+</md-sidenav>
+
+<div flex="" role="main" tabindex="-1" layout="column">
+    <md-toolbar class="md-default-theme">
+        
+        <div class="md-toolbar-tools" tabindex="0">
+            <md-button hide-gt-sm lb-sidenav-switch aria-label="Toggle menu" class="sidebar-switch" ng-click="toggleNav()"><span class="fa fa-bars"/></md-button>
+            <div class="fill-height" flex="" layout="row">{{currentPageName}}</div>
+            
+            <span class="current-user">
+                <span ng-show="auth.isLogged">Logged as: {{auth.user.username}}</span>
+                <span ng-hide="auth.isLogged">Anonymous</span>
+            </span>
+        </div>
+        
+        
+    </md-toolbar>
+    <md-content class="md-padding">
+        <ui-view />
+    </md-content>
+</div>

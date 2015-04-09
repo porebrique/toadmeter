@@ -1,0 +1,17 @@
+.md-tile-left button.md-fab {
+    margin-right: 0.6rem;
+    position: relative;
+    top: -10px;
+}
+
+md-list .md-tile-left {
+    min-width: 2rem;
+    margin-right: 0;
+/*    position: relative;*/
+/*    top: -2px;*/
+/*    text-align: center;*/
+}
+
+.transactions-list .md-title {
+    margin-top: 0;
+}

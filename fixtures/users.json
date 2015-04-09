@@ -1,57 +1,20 @@
-
 [
 {
     "pk": 1, 
     "model": "auth.user", 
     "fields": {
-        "username": "janedoe", 
-        "first_name": "Jane", 
-        "last_name": "Doe", 
+        "username": "admin", 
+        "first_name": "", 
+        "last_name": "", 
         "is_active": true, 
-        "is_superuser": false, 
+        "is_superuser": true, 
         "is_staff": true, 
-        "last_login": "2014-02-27T11:05:27.841Z", 
-        "groups": [1], 
-        "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$bXgm4OsRKDqt$sOpbk/fqGfUHd1303zWevsdlinJemK2qi0TILMKBg8I=", 
-        "email": "janedoe@admin.ololo", 
-        "date_joined": "2014-02-27T11:05:27.841Z"
-    }
-},
-{
-    "pk": 2, 
-    "model": "auth.user", 
-    "fields": {
-        "username": "johndoe", 
-        "first_name": "John", 
-        "last_name": "Doe", 
-        "is_active": true, 
-        "is_superuser": false, 
-        "is_staff": true, 
-        "last_login": "2014-02-27T11:05:27.841Z", 
-        "groups": [2], 
-        "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$bXgm4OsRKDqt$sOpbk/fqGfUHd1303zWevsdlinJemK2qi0TILMKBg8I=", 
-        "email": "johndoe@admin.ololo", 
-        "date_joined": "2014-02-27T11:05:27.841Z"
-    }
-},
-{
-    "pk": 3, 
-    "model": "auth.user", 
-    "fields": {
-        "username": "clientvasiliy", 
-        "first_name": "Василий", 
-        "last_name": "Васильев", 
-        "is_active": true, 
-        "is_superuser": false, 
-        "is_staff": false, 
-        "last_login": "2014-02-27T11:05:27.841Z", 
+        "last_login": "2015-04-07T12:26:04.645Z", 
         "groups": [], 
         "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$bXgm4OsRKDqt$sOpbk/fqGfUHd1303zWevsdlinJemK2qi0TILMKBg8I=", 
-        "email": "vasvas@admin.ololo", 
-        "date_joined": "2014-02-27T11:05:27.841Z"
+        "password": "pbkdf2_sha256$12000$5LSLqQAgmi60$aTSQUqsoONi4kpKiKdaxkPYvVAmkGzJ5X+/bryrBJX8=", 
+        "email": "admin@admin.ad", 
+        "date_joined": "2015-04-07T12:26:04.645Z"
     }
-}        
+}
 ]
