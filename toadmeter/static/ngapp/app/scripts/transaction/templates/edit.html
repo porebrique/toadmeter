@@ -1,0 +1,63 @@
+<form name="transaction_form">
+
+<div layout="row">
+    <div flex-gt-md="50" flex-gt-sm="75" flex-sm>
+        <md-content class="md-padding">
+            <div layout="column" layout-sm="column">
+                <div>
+                <md-input-container>
+                    <label>Число</label>
+                    <input ng-model="transaction.size" type="text" placeholder="число" ng-pattern="/\d+/" required/>
+                </md-input-container>
+                </div>
+        <div class="numpad">        
+            <div class="numpad-row">
+                <md-button class="md-raised" ng-click="append(1)">1</md-button>
+                <md-button class="md-raised" ng-click="append(2)">2</md-button>
+                <md-button class="md-raised" ng-click="append(3)">3</md-button>
+            </div>
+            <div class="numpad-row">
+                <md-button class="md-raised" ng-click="append(4)">4</md-button>
+                <md-button class="md-raised" ng-click="append(5)">5</md-button>
+                <md-button class="md-raised" ng-click="append(6)">6</md-button>
+            </div>
+            <div class="numpad-row">
+                <md-button class="md-raised" ng-click="append(7)">7</md-button>
+                <md-button class="md-raised" ng-click="append(8)">8</md-button>
+                <md-button class="md-raised" ng-click="append(9)">9</md-button>
+            </div>
+            <div class="numpad-row">
+                <md-button class="md-raised" ng-click="append(0)">0</md-button>
+                <md-button class="md-raised backspace" aria-label="backspace" ng-click="append(null)"><span class="fa fa-arrow-left"/></md-button>
+            </div>
+                </div>              
+            </div>            
+        </md-content>
+        
+        <md-content class="md-padding">
+            <input type="hidden" ng-model="transaction.tag" required />
+            <md-button class="" 
+                       ng-class="{'md-accent': transaction.tag === tag.id}"
+                       ng-repeat="tag in tags" 
+                       ng-click="transaction.tag = tag.id">{{::tag.text}}</md-button>
+        </md-content>
+    </div>
+</div>
+
+
+    
+<md-content layout="row" class="md-padding" style="overflow: visible">
+    <md-button ng-click="save()" 
+               aria-label="save"
+               ng-disabled="transaction_form.$invalid"
+               class="md-primary md-raised">
+        <span ng-show="transaction_form.$invalid">
+            <md-tooltip style="margin-top: -30px;">Нужно указать сумму и метку</md-tooltip>
+        </span>
+        <span spinner-when="is.saving"><span class="fa fa-check"></span></span>
+    </md-button>
+</md-content>
+
+
+
+</form>    

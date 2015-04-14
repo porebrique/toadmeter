@@ -23,6 +23,8 @@
         'ngMaterial',
         'ui.router',
         'mdDateTime',
+        
+        'highcharts-ng',
 
         'restangular',
         'restmod',
@@ -31,7 +33,8 @@
         'AuthModule',
         'UserModule',
         'TransactionModule'
-    ]);
+    ]),
+        $restmodProvider;
 
     app.appPath = '/static/ngapp/app/';
     app.constant('PROJECT_ROOT_FOLDER', app.appPath);
@@ -52,26 +55,34 @@
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         
+
+        $restmodProvider = restmodProvider;
+        
 //        Restmod config 
         
 //        restmodProvider.rebase('DjangoRestfulFrameworkAPI'); // given the mixin is called MyStyleApi
-        restmodProvider.rebase({
-            $config: {
-                style: 'DRFAPI',
-                primaryKey: 'id',
-                urlPrefix: '/api/' // or use setProperty('urlPrefix', '/api/v1') in a definition function
-            },
-            $hooks: {
-                'before-save': function () {
-//                    this.partCount = this.parts.length;
-                    console.log('before save', this.locals);
-                    delete this.locals;
-                },
-                'before-request': function (req) {
-                    req.url += '/';
-                }
-            }
-        });
+//        restmodProvider.rebase({
+//            $config: {
+//                style: 'DRFAPI',
+//                primaryKey: 'id',
+//                urlPrefix: '/api/' // or use setProperty('urlPrefix', '/api/v1') in a definition function
+//            },
+//            $hooks: {
+//                'after-request-error': function (response) {
+////                    this.partCount = this.parts.length;
+////                    console.log('before save', this.locals);
+//                    console.log('after req', response);
+//                    if (response.status === 403) {
+////                        Auth.clearUser();
+//                        
+//                    }
+////                    delete this.locals;
+//                },
+//                'before-request': function (req) {
+//                    req.url += '/';
+//                }
+//            }
+//        });
         
         // --- Restangular config
         function addLocals(response) {
@@ -117,13 +128,34 @@
 
     
     
-    app.run(['$rootScope', '$state', '$stateParams', '$http', '$cookies', 'Restangular', function ($rootScope, $state, $stateParams, $http, $cookies, Restangular) {
+    app.run(['$rootScope', '$state', '$stateParams', '$http', '$cookies', 'Auth', function ($rootScope, $state, $stateParams, $http, $cookies, Auth) {
         
         // django csrf token, and it would be good to get rid of native $http and use only restangular
         $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
-        Restangular.setDefaultHeaders({
-            'X-CSRFToken': $cookies.csrftoken
+        
+        $restmodProvider.rebase({
+            $config: {
+                style: 'DRFAPI',
+                primaryKey: 'id',
+                urlPrefix: '/api/' // or use setProperty('urlPrefix', '/api/v1') in a definition function
+            },
+            $hooks: {
+                'after-request-error': function (response) {
+                    if (response.status === 403) {
+                        Auth.clearUser();
+                        $state.go('public.login');
+                    }
+//                    delete this.locals;
+                },
+                'before-request': function (req) {
+                    req.url += '/';
+                }
+            }
         });
+//        
+//        Restangular.setDefaultHeaders({
+//            'X-CSRFToken': $cookies.csrftoken
+//        });
         
         
         // Injecting $state and $stateParams to scope

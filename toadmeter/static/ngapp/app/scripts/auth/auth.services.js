@@ -52,18 +52,21 @@
                     .then(function (response) {
                         storage.set('isLogged', true);
                         storage.set('user', response.data.user);
-                        var destination = desiredState ? desiredState.name : 'secure.incomes';
+                        var destination = desiredState ? desiredState.name : 'secure.incomes.list';
                         desiredState = null;
                     
                         $state.go(destination);
                     });
             }
             
+            function clearUser() {
+                storage.reset();
+            }
             
             function logout() {
                 return $http.delete('/api/logout')
                     .then(function (response) {
-                        storage.reset();
+                        clearUser();
 //                        console.log('logged out. going to logout ok page');
                     })
                     .catch(function (error) {
@@ -98,6 +101,7 @@
                 login: login,
                 logout: logout,
                 getUser: getUser,
+                clearUser: clearUser,
                 //isLogged: isLogged,
                 checkAuthentication: checkAuthentication
             };

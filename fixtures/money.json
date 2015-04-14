@@ -3,20 +3,20 @@
     "pk": 1, 
     "model": "transactions.transaction", 
     "fields": {
-        "owner": 1, 
+        "owner": 2, 
         "date": "2015-04-08", 
-        "tag": 1, 
+        "tag": 2, 
         "type": "out", 
-        "size": 1500
+        "size": 15000
     }
 },
 {
     "pk": 2, 
     "model": "transactions.transaction", 
     "fields": {
-        "owner": 1, 
+        "owner": 2, 
         "date": "2015-04-08", 
-        "tag": 3, 
+        "tag": 1, 
         "type": "out", 
         "size": 200
     }
@@ -31,6 +31,17 @@
         "type": "out", 
         "size": 400
     }
-}    
+},
+{
+    "pk": 3, 
+    "model": "transactions.transaction", 
+    "fields": {
+        "owner": 1, 
+        "date": "2015-04-07", 
+        "tag": 5, 
+        "type": "out", 
+        "size": 400
+    }
+}       
     
 ]

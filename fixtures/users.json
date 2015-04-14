@@ -16,5 +16,23 @@
         "email": "admin@admin.ad", 
         "date_joined": "2015-04-07T12:26:04.645Z"
     }
-}
+},
+{
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "other", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2015-04-07T12:26:04.645Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$5LSLqQAgmi60$aTSQUqsoONi4kpKiKdaxkPYvVAmkGzJ5X+/bryrBJX8=", 
+        "email": "admin2@admin.ad", 
+        "date_joined": "2015-04-07T12:26:04.645Z"
+    }
+}    
 ]

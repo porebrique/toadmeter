@@ -9,7 +9,7 @@ TRANSACTION_TYPES = (
 class Tag(models.Model):
     owner = models.ForeignKey(User)
     text = models.CharField(max_length=100)
-    inevitable = models.BooleanField(default=False)
+#    inevitable = models.BooleanField(default=False)
     type = models.CharField(max_length=3, choices=TRANSACTION_TYPES)
     
     def __unicode__(self):
@@ -17,10 +17,13 @@ class Tag(models.Model):
     
 class Transaction(models.Model):
     owner = models.ForeignKey(User)
-    tag = models.ForeignKey(Tag)
+    tag = models.ForeignKey(Tag, related_name="transactions")
     type = models.CharField(max_length=3, choices=TRANSACTION_TYPES)
     date = models.DateField(auto_now_add=True)
     size = models.PositiveIntegerField()
+    
+    class Meta:
+        ordering = ('-date',)
     
     def __unicode__(self):
         return '%s: %s' % (self.tag.text, self.size)

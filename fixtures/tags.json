@@ -3,30 +3,27 @@
     "pk": 1, 
     "model": "transactions.tag", 
     "fields": {
-        "owner": 1, 
+        "owner": 2, 
         "text": "booze", 
-        "type": "out",
-        "inevitable": false
+        "type": "out"
     }
 },
 {
     "pk": 2, 
     "model": "transactions.tag", 
     "fields": {
-        "owner": 1, 
-        "text": "flat rent", 
-        "type": "out",
-        "inevitable": true
+        "owner": 2, 
+        "text": "robbery", 
+        "type": "in"
     }
-},
+},    
 {
     "pk": 3, 
     "model": "transactions.tag", 
     "fields": {
         "owner": 1, 
         "text": "food", 
-        "type": "out",
-        "inevitable": false
+        "type": "out"
     }
 },
 {
@@ -35,8 +32,26 @@
     "fields": {
         "owner": 1, 
         "text": "clothes", 
-        "type": "out",
-        "inevitable": false
+        "type": "out"
     }
-}
+},
+{
+    "pk": 5, 
+    "model": "transactions.tag", 
+    "fields": {
+        "owner": 1, 
+        "text": "salary", 
+        "type": "in"
+    }
+},
+{
+    "pk": 6, 
+    "model": "transactions.tag", 
+    "fields": {
+        "owner": 1, 
+        "text": "flat rent", 
+        "type": "out"
+    }
+}    
+
 ]

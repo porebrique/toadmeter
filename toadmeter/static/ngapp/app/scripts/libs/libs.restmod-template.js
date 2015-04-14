@@ -11,38 +11,51 @@
 
         var defaultOptions;
         
-        defaultOptions = {
-            $extend: {
-                Record: {
-                    isPending: function () {
-                        return this.$pending.length > 0;
+        function provideDefaultOptions() {
+            return {
+                $extend: {
+                    Record: {
+                        isPending: function () {
+                            return this.$pending.length > 0;
+                        },
+                        commonInstanceMethod: function () {
+                            console.log('this is common instance method, called as $scope.something.instanceMethod()');
+                        }
                     },
-                    commonInstanceMethod: function () {
-                        console.log('this is common instance method, called as $scope.something.instanceMethod()');
-                    }
-                },
-                Model: {
-                    getFromCollection: function (collection, id) {
-                        var answer = null;
-                        ng.forEach(collection, function (item) {
-                            if (item.id === id) {
-                                answer = item;
+                    Model: {
+                        getOrCreate: function (id) {
+                            var Model = this,
+                                obj;
+                            if (ng.isDefined(id)) {
+                                console.log('defined id', id);
+                                obj = Model.$find(id);
+                            } else {
+                                obj = Model.$build();
                             }
-                        });
-                        return answer;
-                                   
-                    },
-                    commonModelMethod: function () {
-                        console.log('this is common model method,  called as ModelName.instanceMethod() where it is injected');
+                            return obj;
+                        },
+                        getFromCollection: function (collection, id) {
+                            var answer = null;
+                            ng.forEach(collection, function (item) {
+                                if (item.id === id) {
+                                    answer = item;
+                                }
+                            });
+                            return answer;
+
+                        },
+                        commonModelMethod: function () {
+                            console.log('this is common model method,  called as ModelName.instanceMethod() where it is injected');
+                        }
                     }
                 }
-            }
-        };
+            };
+        }
         
         function provideModel(modelName, providedOptions) {
 //            console.log(defaultOptions.$extend);
             var model = restmod.model(modelName),
-                renderedOptions = ng.copy(defaultOptions);
+                renderedOptions = ng.copy(provideDefaultOptions(model));
             
             if (providedOptions) {
                 ng.extend(renderedOptions.$extend.Model, providedOptions.$extend.Model);

@@ -1,19 +1,14 @@
-<div class="transactions-list">
-    <md-card ng-repeat="day in transactions | unique:'date'">
-        <md-card-content>
-            <h2 class="md-title">{{day.date | date: 'dd.MM.yyyy'}}</h2>
-            <ul>
-                <li ng-repeat="t in transactions | where: {date: day.date}">{{getTag(t.tag).text}}: {{t.size}}</li>
-            </ul>
-        </md-card-content>
-    </md-card>
-</div>    
-<md-button class="md-fab" aria-label="new transaction">
-    <span class="fa fa-plus" />
-</md-button>
+    <md-button class="md-raised md-primary" aria-label="new transaction" ui-sref="{{editButtonUrl}}">
+        <span class="fa fa-plus" />
+    </md-button>
+    <div class="transactions-list">
+        <md-card ng-repeat="day in transactions | unique:'date'">
+            <md-card-content>
+                <h2 class="md-title">{{day.date | date: 'dd.MM.yyyy'}}</h2>
+                <ul>
+                    <li ng-repeat="t in transactions | where: {date: day.date}">{{getTag(t.tag).text}}: {{t.size}}</li>
+                </ul>
+            </md-card-content>
+        </md-card>
+    </div>
 
-<!--
-
-<span ng-repeat="tag in tags">
-    <md-button class="md-raised"> {{tag.text}}</md-button>
-</span>-->

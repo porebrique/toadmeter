@@ -55,22 +55,6 @@
                 data: {
                     secure: true
                 }
-            })
-            .state('secure.incomes', {
-                url: 'incomes',
-//                templateUrl: tmpl('transactions', 'incomes')
-                template: '<transactions-list type="in"/>',
-                data: {
-                    pageName: 'Доходы'
-                }
-            })
-            .state('secure.costs', {
-                url: 'costs',
-//                templateUrl: tmpl('transactions', 'costs')
-                template: '<transactions-list type="out"/>',
-                data: {
-                    pageName: 'Расходы'
-                }
             });
     //            
     }]);

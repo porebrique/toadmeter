@@ -32,6 +32,7 @@
     <div ui-view style="min-height: 100%;" layout="row"></div>
       
       
+    <script src="/static/ngapp/bower_components/highcharts/adapters/standalone-framework.js"></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/static/ngapp/bower_components/angular/angular.js"></script>
@@ -49,8 +50,16 @@
     <script src="/static/ngapp/bower_components/angular-restmod/dist/angular-restmod-bundle.min.js"></script>
     <script src="/static/ngapp/bower_components/ngstorage/ngStorage.js"></script>
     <script src="/static/ngapp/bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="/static/ngapp/bower_components/highcharts/highcharts.js"></script>
+<!--
+    <script src="/static/ngapp/bower_components/highcharts/highcharts-more1.js"></script>
+    <script src="/static/ngapp/bower_components/highcharts/modules/exporting1.js"></script>
+    
+-->
+      <script src="/static/ngapp/bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+    
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="/static/ngapp/app/scripts/app.js"></script>
@@ -76,6 +85,7 @@
         <script src="/static/ngapp/app/scripts/transaction/transaction.services.js"></script>
         <script src="/static/ngapp/app/scripts/transaction/transaction.controllers.js"></script>
         <script src="/static/ngapp/app/scripts/transaction/transaction.components.js"></script>
+        <script src="/static/ngapp/app/scripts/transaction/transaction.routing.js"></script>
 <!--        <script src="/static/ngapp/app/scripts/transaction/transaction.directives.js"></script>      -->
         <!-- endbuild -->
       
