@@ -1,1 +1,7 @@
-<highchart id="stats-pie-chart" config="chartConfig"></highchart>
+<div ng-hide="thereAreStats()">
+    <span ng-show="type === 'out'">Здесь будет статистика расходов. Когда они появятся.</span>
+    <span ng-show="type === 'in'">Здесь будет статистика доходов. Когда они появятся.</span>
+</div>
+<div ng-show="thereAreStats()">
+    <highchart id="stats-pie-chart" config="chartConfig"></highchart>
+</div>

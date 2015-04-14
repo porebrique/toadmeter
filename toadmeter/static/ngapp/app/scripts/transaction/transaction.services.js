@@ -6,6 +6,9 @@
     
     mdl.factory('Stat', ['RestmodTemplate', function (RestmodTemplate) {
         
+        function thereAreStats(stats) {
+        
+        }
         function mapSeries(stats) {
             var series = [];
             ng.forEach(stats, function (tag) {
@@ -28,7 +31,7 @@
                             cursor: 'pointer',
                             dataLabels: {
                                 enabled: true,
-                                format: '<b>{point.name}</b>: {point.y},',
+                                format: '<b>{point.name}</b>: {point.y}',
                                 style: {
                                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                                 }
@@ -61,7 +64,8 @@
         var mix = {
             $extend: {
                 Model: {
-                    getChartConfig: getChartConfig
+                    getChartConfig: getChartConfig,
+                    mapSeries: mapSeries
                 }
             }
         };

@@ -14,7 +14,9 @@
                     $scope.chartConfig = Stat.getChartConfig($scope.stats);
                 });
             
-
+            $scope.thereAreStats = function () {
+                return Stat.mapSeries($scope.stats).length > 0;
+            };
         }]);
 
     mdl.controller('Transaction.EditCtrl', ['$q', '$scope', '$state', '$stateParams', 'Auth', 'Transaction', 'Tag',
@@ -32,7 +34,8 @@
                 $scope.transaction.$save();
             };
 
-            $scope.append = function (what) {
+            $scope.appendDigit = function (what) {
+                console.log('append', what);
                 var size = $scope.transaction.size;
                 size = ng.isUndefined(size) ? '' : size.toString();
                 if (ng.isNumber(what)) {
@@ -42,6 +45,12 @@
                     size = size.substr(0, size.length - 1);
                 }
                 $scope.transaction.size = size;
+            };
+            
+            $scope.addTag = function () {
+                console.log('add tag', $scope.newTag);
+                var newTag = $scope.tags.$create({text: $scope.newTagText, type: $scope.type});
+                
             };
 
         }]);
