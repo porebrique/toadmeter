@@ -88,3 +88,72 @@ button .spinner .fa {
     position: relative;
 
 }
+
+
+/*--------------------*/
+.stats-page {
+}
+
+.stats-page {
+}
+
+.stats-page .tags {
+    margin-top: 1rem;
+}
+
+.stats-page .tag {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 0.5rem 0.7rem;
+    background: rgba(100, 100, 100, 0.1);
+    margin: 0 1rem 0.5rem 0;
+    text-transform: uppercase;
+}
+
+.stats-page .tag .off{
+}
+
+.stats-page .tag md-checkbox {
+    display: inline-block;
+    margin: 0;
+    text-decoration: uppercase;
+}
+.stats-page {
+}
+
+
+.stats-page {
+}
+/*--------------------*/
+.tm-table {
+}
+
+.tm-table td, .tm-table th {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #F4F4F4;
+}
+
+.tm-table td:first-child {
+    padding-left: 0;
+}
+.tm-table td:last-child {
+    padding-right: 0;
+}
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/
+/*--------------------*/

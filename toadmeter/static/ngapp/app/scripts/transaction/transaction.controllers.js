@@ -6,7 +6,6 @@
     mdl.controller('Transaction.StatsCtrl', ['$q', '$scope', '$state', 'Stat', 'Transaction', 'Tag', '$timeout',
         function ($q, $scope, $state, Stat, Transaction, Tag, $timeout) {
 
-
             $scope.stats = Stat.$collection({type: $scope.type});
             $scope.stats
                 .$refresh()
@@ -14,8 +13,16 @@
                     $scope.chartConfig = Stat.getChartConfig($scope.stats);
                 });
             
-            $scope.thereAreStats = function () {
-                return Stat.mapSeries($scope.stats).length > 0;
+//            $scope.$watch(function () { return $scope.stats; }, function (newValue) {
+//                  //this will fire on stats[0].prop, but not on stats[0].$prop
+//                console.log('newValue');
+//            }, true);
+            
+            $scope.toggleTag = function (tag) {
+                // $-starting props are ignored in $watch, but I don't plan to save stats anyway and can redraw graph manually
+//                tag.$off = ng.isDefined(tag.$off) ? !tag.$off : true;
+//                tag.off = ng.isDefined(tag.off) ? !tag.off : true;
+                $scope.chartConfig = Stat.getChartConfig($scope.stats);
             };
         }]);
 
@@ -31,15 +38,22 @@
 
             $scope.save = function () {
                 $scope.transaction.type = $scope.type;
-                $scope.transaction.$save();
+                $scope.transaction
+                    .$save()
+                    .$then(function () {
+                        var url = {
+                            "in": 'secure.incomes.list',
+                            "out": 'secure.costs.list'
+                        }[$scope.type];
+                        $state.go(url);
+                    });
             };
 
             $scope.appendDigit = function (what) {
-                console.log('append', what);
                 var size = $scope.transaction.size;
                 size = ng.isUndefined(size) ? '' : size.toString();
+                
                 if (ng.isNumber(what)) {
-                    //                    console.log('what is', what, what.toString());
                     size = size + what.toString();
                 } else {
                     size = size.substr(0, size.length - 1);
@@ -48,9 +62,10 @@
             };
             
             $scope.addTag = function () {
-                console.log('add tag', $scope.newTag);
-                var newTag = $scope.tags.$create({text: $scope.newTagText, type: $scope.type});
-                
+                if ($scope.newTagText.length > 0) {
+                    var newTag = $scope.tags.$create({text: $scope.newTagText, type: $scope.type});
+                    $scope.newTagText = null;
+                }
             };
 
         }]);

@@ -32,7 +32,8 @@
         'LibsModule',
         'AuthModule',
         'UserModule',
-        'TransactionModule'
+        'TransactionModule',
+        'TagModule'
     ]),
         $restmodProvider;
 

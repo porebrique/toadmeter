@@ -32,6 +32,12 @@ class StatViewSet(viewsets.GenericViewSet):
         if type:
             queryset = queryset.filter(type=type)
         result = StatSerializer(queryset, many=True).data    
+        print result
+#        for tag in result:
+#            print 'Tag:', tag
+#            result.remove(tag)
+        result = [tag for tag in result if tag['sum'] > 0]
+        print 'after', result
         return response.Response(result, status=status.HTTP_200_OK)
 
 class TagSerializer(serializers.ModelSerializer):

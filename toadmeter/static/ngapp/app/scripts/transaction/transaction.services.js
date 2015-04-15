@@ -6,24 +6,38 @@
     
     mdl.factory('Stat', ['RestmodTemplate', function (RestmodTemplate) {
         
-        function thereAreStats(stats) {
-        
-        }
+//        function thereAreStats(stats) {
+//        
+//        }
         function mapSeries(stats) {
-            var series = [];
+            var series = [],
+                sum = 0;
             ng.forEach(stats, function (tag) {
-                if (tag.sum > 0) {
+                if (!ng.isDefined(tag.$enabled)) {
+                    tag.$enabled = true;
+                }
+                if (tag.$enabled) {
                     series.push([tag.text, tag.sum]);
+                    sum = sum + tag.sum;
                 }
             });
-            return series;
+            return {
+                total: sum,
+                series: series
+            };
+        }
+        
+        function getTotalSum(stats) {
+        
         }
         
         function getChartConfig(stats) {
+            var data = mapSeries(stats);
+            
             return {
                 options: {
-//                        title: {text: 'Browser market shares at a specific website, 2014'},
-                    title: null,
+                    title: {text: 'Сумма: ' + data.total},
+//                    title: null,
                     tooltip: {pointFormat: '<strong>{point.y}</strong>, ({point.percentage:.1f}%)'},
                     plotOptions: {
                         pie: {
@@ -45,16 +59,21 @@
 
                 //The below properties are watched separately for changes.
 
+                size: {
+//                    height: 300,
+                    height: 400,
+                    width: 500
+                    
+                },
+                
                 //Series object (optional) - a list of series using normal highcharts series options.
                 series: [{
                     name: 'Сумма',
-                    data: mapSeries(stats)
+                    data: data.series
+//                    data: stats
 
-                }],
-                size: {
-                    width: 400,
-                    height: 300
-                }
+                }]
+
 
             };
 
@@ -64,19 +83,15 @@
         var mix = {
             $extend: {
                 Model: {
-                    getChartConfig: getChartConfig,
-                    mapSeries: mapSeries
+                    getChartConfig: getChartConfig
+//                    mapSeries: mapSeries
                 }
             }
         };
         
         return RestmodTemplate.provideModel('stats').mix(mix);
     }]);
-    
-    mdl.factory('Tag', ['RestmodTemplate', function (RestmodTemplate) {
-        return RestmodTemplate.provideModel('tags');
-    }]);
-    
+
     mdl.factory('Transaction', ['RestmodTemplate', function (RestmodTemplate) {
         
         var mix = {
