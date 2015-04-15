@@ -1,12 +1,26 @@
 <div class="stats-page">
-                                          
+                        
     <div ng-show="stats.length < 1">
         <span ng-show="type === 'out'">Здесь будет статистика расходов. Когда они появятся.</span>
         <span ng-show="type === 'in'">Здесь будет статистика доходов. Когда они появятся.</span>
-    </div>
-    <div class="graph" ng-show="stats.length > 0">
-        <highchart id="stats-pie-chart" config="chartConfig"></highchart>
-    </div>
+    </div>    
+    
+    <md-tabs  md-border-bottom ng-show="stats.length > 0">
+        <md-tab label="<span class='fa fa-pie-chart'></span>">
+            <md-content class="md-padding">
+                    <highchart id="stats-pie-chart" config="chartConfig"></highchart>
+            </md-content>
+        </md-tab>
+        <md-tab label="<span class='fa fa-bar-chart'></span>">
+            <md-content class="md-padding">
+            dsd
+            </md-content>
+        </md-tab>
+    </md-tabs>
+        
+    
+
+
     
     <div class="tags">
 
