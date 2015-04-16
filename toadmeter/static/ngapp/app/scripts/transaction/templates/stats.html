@@ -1,6 +1,5 @@
-<div class="stats-page">
-                        
-    <div ng-show="stats.length < 1">
+<div class="stats-page" ng-cloak>
+    <div ng-show="stats.length < 1 && stats.$pending.length < 0">
         <span ng-show="type === 'out'">Здесь будет статистика расходов. Когда они появятся.</span>
         <span ng-show="type === 'in'">Здесь будет статистика доходов. Когда они появятся.</span>
     </div>    
@@ -8,12 +7,13 @@
     <md-tabs  md-border-bottom ng-show="stats.length > 0">
         <md-tab label="<span class='fa fa-pie-chart'></span>">
             <md-content class="md-padding">
-                    <highchart id="stats-pie-chart" config="chartConfig"></highchart>
+                <highchart id="stats-pie-chart" config="pieChartConfig"></highchart>
             </md-content>
-        </md-tab>
+        </md-tab>        
         <md-tab label="<span class='fa fa-bar-chart'></span>">
             <md-content class="md-padding">
-            dsd
+                <highchart id="stats-column-chart" config="columnChartConfig"></highchart>
+                
             </md-content>
         </md-tab>
     </md-tabs>
@@ -24,19 +24,10 @@
     
     <div class="tags">
 
-<!--
-        <md-button ng-repeat="tag in stats" 
-                   ng-class="{'md-primary': !tag.$off}"
-                   ng-click="toggleTag(tag)">
-            {{tag.text}}
-        </md-button>
--->
-
         <span class="tag"
               ng-repeat="tag in stats" 
-              ng-class="{'off': !tag.$enabled}"
-              ng-click="toggleTag(tag)">
-            <md-checkbox ng-model="tag.$enabled" class="md-primary" aria-label="Toggle {{tag.text}}">
+              nssssg-click="toggleTag(tag)">
+            <md-checkbox ng-model="tag.enabled" ng-change="toggleTag(tag)" class="md-primary" aria-label="Toggle {{tag.text}}">
               {{::tag.text}} ({{::tag.sum}})
             </md-checkbox>            
         </span>

@@ -6,23 +6,29 @@
     mdl.controller('Transaction.StatsCtrl', ['$q', '$scope', '$state', 'Stat', 'Transaction', 'Tag', '$timeout',
         function ($q, $scope, $state, Stat, Transaction, Tag, $timeout) {
 
-            $scope.stats = Stat.$collection({type: $scope.type});
-            $scope.stats
+            function redrawGraphs() {
+                $scope.pieChartConfig = Stat.getChartConfig('pie', $scope.stats);
+                $scope.columnChartConfig = Stat.getChartConfig('column', $scope.stats);
+            }
+            
+            Stat.$collection({type: $scope.type})
                 .$refresh()
                 .$then(function (response) {
-                    $scope.chartConfig = Stat.getChartConfig($scope.stats);
+                    ng.forEach(response, function (tag) {
+                        tag.enabled = true;
+                    });
+//                    $scope.stats = Stat.prepareStats(response);
+                    $scope.stats = response;
+//                    console.log($scope.stats);
+                    Stat.updateData($scope.stats);
+                    redrawGraphs();
                 });
             
-//            $scope.$watch(function () { return $scope.stats; }, function (newValue) {
-//                  //this will fire on stats[0].prop, but not on stats[0].$prop
-//                console.log('newValue');
-//            }, true);
             
             $scope.toggleTag = function (tag) {
-                // $-starting props are ignored in $watch, but I don't plan to save stats anyway and can redraw graph manually
-//                tag.$off = ng.isDefined(tag.$off) ? !tag.$off : true;
-//                tag.off = ng.isDefined(tag.off) ? !tag.off : true;
-                $scope.chartConfig = Stat.getChartConfig($scope.stats);
+                console.log('toggle tag');
+                Stat.updateData($scope.stats);
+                redrawGraphs();
             };
         }]);
 
@@ -89,6 +95,7 @@
             //                $scope.tags = responses[1];
             //            });
 
+            
             $scope.getTag = function (tag_id) {
                 var tag = null;
                 if ($scope.tags.length > 0) {

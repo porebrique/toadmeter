@@ -15,6 +15,7 @@ class StatSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ('id', 'text', 'sum', 'type')
         
+#    NB! this is TOTAL sum, not limited by any period
     def get_sum(self, object):
         sum = object.transactions.aggregate(sum=models.Sum('size'))
         return sum['sum'] or 0
@@ -32,12 +33,13 @@ class StatViewSet(viewsets.GenericViewSet):
         if type:
             queryset = queryset.filter(type=type)
         result = StatSerializer(queryset, many=True).data    
-        print result
+#        print result
 #        for tag in result:
 #            print 'Tag:', tag
 #            result.remove(tag)
         result = [tag for tag in result if tag['sum'] > 0]
-        print 'after', result
+        result = sorted(result, key=lambda k: k['sum'], reverse=True) 
+#        print 'after', result
         return response.Response(result, status=status.HTTP_200_OK)
 
 class TagSerializer(serializers.ModelSerializer):
