@@ -1,3 +1,6 @@
+body {
+    font-family: 'open sans';
+}
 .sidebar-switch {
     margin: 0 10px 0 -6px;
 }
@@ -39,3 +42,19 @@
     background: rgba(96, 125, 140, 0.1);
 }
 
+md-toolbar .current-user {
+
+}
+
+md-toolbar .current-user .fa-user {
+    position: relative;
+    top: -0.1em;
+    margin-right: 0.2em;
+
+}
+
+
+h1, h2, h3 {
+    font-weight: normal;
+    font-family: roboto slab;
+}

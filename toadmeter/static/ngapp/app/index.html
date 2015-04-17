@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/static/ngapp/app/styles/template.css">
     <link rel="stylesheet" href="/static/ngapp/app/styles/common-styles.css">      
 
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,400italic|Roboto+Slab:400,700&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
     <!-- endbuild -->
   </head>
   <body>
@@ -29,7 +30,10 @@
     <!-- Add your site or application content here -->
 
       
-    <div ui-view style="min-height: 100%;" layout="row"></div>
+    <section ui-view style="min-height: 100%;" layout="row" flex>
+      
+    
+    </section>
       
       
     <script src="/static/ngapp/bower_components/highcharts/adapters/standalone-framework.js"></script>
@@ -69,6 +73,7 @@
         <script src="/static/ngapp/app/scripts/libs/libs.module.js"></script>
         <script src="/static/ngapp/app/scripts/libs/libs.restmod-template.js"></script>
         <script src="/static/ngapp/app/scripts/libs/libs.directives.forms.js"></script>
+        <script src="/static/ngapp/app/scripts/libs/libs.directives.template.js"></script>
       
         <script src="/static/ngapp/app/scripts/auth/auth.module.js"></script>
         <script src="/static/ngapp/app/scripts/auth/auth.services.js"></script>

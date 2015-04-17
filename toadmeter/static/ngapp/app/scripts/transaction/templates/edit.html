@@ -36,6 +36,7 @@
         </md-content>
         
         <md-content class="md-padding">
+            <span>{{transaction.tag}}</span>
             <input type="hidden" ng-model="transaction.tag" required />
             <md-button class="" 
                        ng-class="{'md-accent': transaction.tag === tag.id}"

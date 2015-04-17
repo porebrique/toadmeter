@@ -1,0 +1,26 @@
+ <table class="tm-table">
+
+        <tr ng-repeat="tag in tags">
+            
+<!--
+            <td>
+                <span ng-show="tag.type === 'out'" class="fa fa-arrow-circle-o-down"></span>
+                <span ng-show="tag.type === 'in'" class="fa fa-arrow-circle-o-up"></span>
+            </td>
+-->
+            <td>{{tag.text}}</td>
+            <td>
+                <md-button class="md-raised"
+                           aria-label="edit {{tag.text}}"
+                           ng-click="editTag(tag)">
+                    <span class="fa fa-pencil"></span>
+                </md-button>
+                <md-button class="md-raised md-warn"
+                           aria-label="delete {{tag.text}}"
+                           ng-click="deleteTag(tag)">
+                    <span class="fa fa-remove"></span>
+                </md-button>                
+            </td>
+
+        </tr>
+    </table>
