@@ -198,6 +198,41 @@ module.exports = function (grunt) {
           }
       }
     },
+      
+    replace: {
+                rewriteurlsinhtml: {
+                    src: ['<%= yeoman.dist %>/index.html'], // source files array (supports minimatch)
+                    dest: '<%= yeoman.dist %>/index.html', // destination directory or file
+                    replacements: [
+//                        {
+//                            from: 'styles/vendor.css',
+//                            to: '/static/ngapp/dist/styles/vendor.css'
+//                        },
+//                        {
+//                            from: 'styles/main.css',
+//                            to: '/static/ngapp/dist/styles/main.css'
+//                        },
+//                        {
+//                            from: 'app/styles',
+//                            to: '/static/ngapp/dist/styles'
+//                        },
+//                        {from: 'app/src/', to: '/static/ngapp/dist/js/'},
+                        {from: 'scripts/', to: '/static/ngapp/dist/scripts/'},
+                        {from: 'styles/', to: '/static/ngapp/dist/styles/'}
+                    ]
+                },        
+                prepareUrlsInHtml: {
+                    src: ['<%= yeoman.app %>/index.html'], // source files array (supports minimatch)
+                    dest: '<%= yeoman.app %>/', // destination directory or file
+                    replacements: [
+                        {
+                            from: '/static/ngapp/',
+                            to: ''
+                        }
+                    ]
+                }    
+    
+    },
 
     // Renames files for browser caching purposes
     filerev: {
@@ -331,6 +366,30 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+        backup: {
+            files: [{
+                expand: true, //?
+                dot: true, //?
+                cwd: '<%= yeoman.app %>',
+//                        dest: '<%= yeoman.dist %>/backup',
+                dest: '.tmp/',
+                src: [
+                    'index.html'
+                ]
+            }]
+        },
+        unbackup: {
+            files: [{
+                expand: true, //?
+                dot: true, //?
+//                        cwd: '<%= yeoman.dist %>/backup',
+                cwd: '.tmp/',
+                dest: '<%= yeoman.app %>',
+                src: [
+                    'index.html'
+                ]
+            }]
+        },        
       dist: {
         files: [{
           expand: true,
@@ -416,19 +475,25 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'copy:backup', //my  
+    'replace:prepareUrlsInHtml',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'concat',
-    'ngAnnotate',
+//    'ngAnnotate',
     'copy:dist',
-    'cdnify',
+//    'cdnify',
     'cssmin',
+      
+    'replace:rewriteurlsinhtml', //my
     'uglify',
-    'filerev',
+//    'filerev',
     'usemin',
-    'htmlmin'
+//    'htmlmin'
+      
+    'copy:unbackup', //my
   ]);
 
   grunt.registerTask('default', [

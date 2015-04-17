@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 
 #    url(r'^admin/', include(admin.site.urls)),
     (r'^dev/$', TemplateView.as_view(template_name="ngapp/app/index.html")),
+    (r'^$', TemplateView.as_view(template_name="ngapp/dist/index.html")),
                        
     (r'^api/', include('toadmeter.api.urls')),                       
 )
