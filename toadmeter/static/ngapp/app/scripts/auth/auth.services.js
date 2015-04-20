@@ -81,8 +81,10 @@
 
             function checkAuthentication(event, toState, toParams, fromState, fromParams) {
                 if (toState.data.secure && !isLogged()) {
+//                    console.log('triyn to get to secure state while not logged');
                     event.preventDefault();
                     if (fromState.name === 'login') {
+//                        console.log('jsut refreshing login page');
                         $state.reload();
                     } else {
                         desiredState = toState;

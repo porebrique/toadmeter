@@ -21,8 +21,16 @@ def login_view(request):
     data = json.loads(request.body)
     username = data.get('username', None)
     password = data.get('password', None)
+    remember = data.get('remember', None)
+#    print 'session is', request.session
+    
     if username and password:
         user = authenticate(username=username, password=password)
+#        print 'remember is', remember
+        if not remember:
+            request.session.set_expiry(0)
+#            print 'session will die at browser closing'
+            
 #        print 'user is',  user
         if user is not None:
             if user.is_active:
