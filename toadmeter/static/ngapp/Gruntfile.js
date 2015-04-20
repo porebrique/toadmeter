@@ -366,6 +366,17 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+        fa: {
+            files: [{
+                expand: true,
+                dot: true,
+                cwd: 'bower_components/font-awesome/fonts/',
+                dest: '<%= yeoman.dist %>/fonts',
+                src: [
+                    '*.*'
+                ]
+            }]
+        },
         backup: {
             files: [{
                 expand: true, //?
@@ -482,10 +493,11 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'autoprefixer',
     'concat',
-//    'ngAnnotate',
+    'ngAnnotate',
     'copy:dist',
 //    'cdnify',
     'cssmin',
+    'copy:fa', //my
       
     'replace:rewriteurlsinhtml', //my
     'uglify',
