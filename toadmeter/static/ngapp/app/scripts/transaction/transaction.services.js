@@ -25,15 +25,15 @@
             return processedStats;
         }
         function mapSeries(stats, type) {
-            console.log('mapping data', stats);
+//            console.log('mapping data', stats);
             var series = [],
                 sum = 0;
             ng.forEach(stats, function (tag) {
                 if (!ng.isDefined(tag.enabled)) {
                     tag.enabled = true;
-                    console.log('changing someth');
+//                    console.log('changing someth');
                 }
-                console.log('inside mapping loop');
+//                console.log('inside mapping loop');
                 if (tag.enabled) {
                     series.push([tag.text, tag.sum]);
                     sum = sum + tag.sum;
@@ -56,7 +56,7 @@
         
         
         function getChartConfig(chartType, unmappedData) {
-            console.log(mapped_data);
+//            console.log(mapped_data);
 //            var data = mapSeries(unmappedData, chartType),
             var data = mapped_data,
                 config = {

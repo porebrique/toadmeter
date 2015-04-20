@@ -1,7 +1,16 @@
-<p>Тут кароч будет всякое</p>
+<md-content class="md-padding">
+    <p>
+        <strong>Жабометр</strong> &mdash; приложение для учёта и анализа доходов и расходов. Ну, как "анализа", например, вы можете вывести на пару графиков интересующие статьи расходов, чтобы сравнить, на что больше тратите.
+    </p>
 
 
-<md-button ui-sref="public.login" class="md-raised md-primary">Login</md-button>
-<md-button ui-sref="public.reg" class="md-raised">Registration</md-button>
+    <div ng-hide="auth.isLogged">
+        <p>
+            Для работы нужно зарегистрироваться. Только логин и пароль, просто чтобы было с чем сопоставить ваши данные.
+        </p>
+        <md-button ui-sref="public.login" class="md-raised md-primary">Вход</md-button>
+        <md-button ui-sref="public.reg" class="md-raised">Регистрация</md-button>
+    </div>
 
-<!--<md-button class="md-accent md-fab md-hue-3" aria-label="nope"> <span class="fa fa-star"/></md-button>-->
+</md-content>    
+    

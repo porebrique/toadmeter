@@ -29,10 +29,10 @@
         
         <div class="md-toolbar-tools" tabindex="0">
             <md-button hide-gt-sm lb-sidenav-switch aria-label="Toggle menu" class="sidebar-switch" ng-click="toggleNav()"><span class="fa fa-bars"/></md-button>
-            <div class="fill-height" flex="" layout="row">{{currentPageName}}</div>
+            <h1 class="fill-height" flex="" layout="row">{{currentPageName}}</h1>
             
-            <span class="current-user">
-                <span ng-show="auth.isLogged">Logged as: {{auth.user.username}}</span>
+            <span class="current-user" ng-show="auth.isLogged">
+                <span ng-show="auth.isLogged"><span class="fa fa-user"></span>{{auth.user.username}}</span>
                 <span ng-hide="auth.isLogged">Anonymous</span>
             </span>
         </div>

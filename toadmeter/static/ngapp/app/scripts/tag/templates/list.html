@@ -1,27 +1,21 @@
 <div>
-
-    <table class="tm-table">
-
-        <tr ng-repeat="tag in tags">
+    <md-tabs>
+        <md-tab label="<span class='fa fa-arrow-circle-o-down'></span>">
+            <md-content class="md-padding">
+                <tags-list-filtered tags="costs"/>
+            </md-content>
+        </md-tab>      
             
-            <td>
-                <span ng-show="tag.type === 'out'" class="fa fa-arrow-circle-o-down"></span>
-                <span ng-show="tag.type === 'in'" class="fa fa-arrow-circle-o-up"></span>
-            </td>
-            <td>{{tag.text}}</td>
-            <td>
-                <md-button class="md-raised"
-                           aria-label="edit {{tag.text}}"
-                           ng-click="editTag(tag)">
-                    <span class="fa fa-pencil"></span>
-                </md-button>
-                <md-button class="md-raised md-warn"
-                           aria-label="delete {{tag.text}}"
-                           ng-click="deleteTag(tag)">
-                    <span class="fa fa-remove"></span>
-                </md-button>                
-            </td>
+        <md-tab label="<span class='fa fa-arrow-circle-o-up'></span>">
+            <md-content class="md-padding">
+                <tags-list-filtered tags="incomes"/>
+            </md-content>
+        </md-tab>      
+    </md-tabs>
+            
 
-        </tr>
-    </table>
+    
+    
+    
+   
 </div>

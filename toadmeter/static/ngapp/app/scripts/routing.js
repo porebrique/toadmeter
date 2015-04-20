@@ -34,7 +34,10 @@
             })
             .state('public.home', {
                 url: '',
-                templateUrl: tmpl('global', 'home')
+                templateUrl: tmpl('global', 'home'),
+                data: {
+                    pageName: 'Жабометр'
+                }
             })
             .state('public.userlist', {
                 url: 'userlist',
