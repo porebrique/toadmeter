@@ -28,3 +28,46 @@
 .tags-list .edit-mode .text-display {
     display: none;
 }
+
+/*-----------------*/
+.transactions-list {
+}
+
+.transactions-list .md-title {
+    margin: 0 0 0 0.5em;
+}
+
+.transactions-list .md-title .sum {
+    float: right;
+}
+
+.transactions-list .md-title .sum .fa{
+    margin-right: 5px;
+}
+.transactions-list md-card {
+    cursor: pointer;
+}
+
+.transactions-list ul {
+    margin-top: 1em;
+    display: none;
+}
+
+.transactions-list .open ul {
+    display: block;
+}
+
+.transactions-list ul li {
+    margin-bottom: 0.5em;
+    color: #CECECE;
+}
+
+.transactions-list ul a {
+    text-decoration: none;
+}
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/
+/*-----------------*/

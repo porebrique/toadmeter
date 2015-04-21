@@ -77,23 +77,48 @@
         }]);
 
 
-    mdl.controller('Transaction.ListCtrl', ['$q', '$scope', '$state', 'Auth', 'Transaction', 'Tag',
-        function ($q, $scope, $state, Auth, Transaction, Tag) {
-
-
-            $scope.transactions = Transaction.$collection({
-                type: $scope.type
-            });
+    mdl.controller('Transaction.ListCtrl', ['$q', '$scope', '$state', '$filter', 'Auth', 'Transaction', 'Tag',
+        function ($q, $scope, $state, $filter, Auth, Transaction, Tag) {
+            
+            Transaction
+                .$collection({
+                    type: $scope.type
+                })
+                .$refresh()
+                .$then(function (response) {
+//                    $scope.transactions = $filter('unique')(response, 'date');
+                    $scope.transactions = response;
+                });
             $scope.tags = Tag.$collection();
-            $scope.transactions.$refresh();
+//            $scope.transactions.$refresh();
             $scope.tags.$refresh();
-            $scope.editButtonUrl = $scope.type === 'in' ? 'secure.incomes.edit' : 'secure.costs.edit';
-
-            //            $q.all([Transaction.$collection().$refresh().$asPromise(), Tag.$collection().$refresh().$asPromise()]).then(function (responses) {
-            //                console.log('got ', responses);
-            //                $scope.transactions = responses[0];
-            //                $scope.tags = responses[1];
-            //            });
+            $scope.addButtonUrl = $scope.type === 'in' ? 'secure.incomes.edit' : 'secure.costs.edit';
+            
+            
+            $scope.getSumFor = function (date) {
+                console.log(date);
+                var sum = 0,
+                    selection = $filter('where')($scope.transactions, {date: date});
+                ng.forEach(selection, function (ta) {
+                    sum += ta.size;
+                });
+//                console.log(sum);
+                return sum;
+            };
+            
+            $scope.getEditUrlFor = function (ta) {
+                var url = $scope.addButtonUrl + '({transaction_id: %id%})';
+                url = url.replace('%id%', ta.id);
+                return url;
+            };
+            
+            $scope.toggle = function (day) {
+                if ($scope.openDay === day) {
+                    $scope.openDay = null;
+                } else {
+                    $scope.openDay = day;
+                }
+            };
 
             
             $scope.getTag = function (tag_id) {

@@ -27,7 +27,7 @@
                 }
             })
             .state('secure.incomes.edit', {
-                url: 'edit',
+                url: 'edit/:transaction_id',
                 template: '<transaction-edit type="in"/>',
                 data: {
                     pageName: 'Новая запись'
@@ -48,7 +48,7 @@
                 }
             })
             .state('secure.costs.edit', {
-                url: 'edit',
+                url: 'edit/:transaction_id',
                 template: '<transaction-edit type="out"/>',
                 data: {
                     pageName: 'Новая запись'
