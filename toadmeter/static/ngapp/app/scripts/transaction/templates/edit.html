@@ -36,9 +36,9 @@
         </md-content>
         
         <md-content class="md-padding">
-            <span>{{transaction.tag}}</span>
             <input type="hidden" ng-model="transaction.tag" required />
             <md-button class="" 
+                       type="button"
                        ng-class="{'md-accent': transaction.tag === tag.id}"
                        ng-repeat="tag in tags" 
                        ng-click="transaction.tag = tag.id">{{::tag.text}}</md-button>
@@ -49,7 +49,11 @@
                 <input ng-model="newTagText" type="text" placeholder="текст" on-enter="addTag()" />
             </md-input-container>        
             <div style="position: absolute; top: 28px; right: 0">
-                <md-button aria-label="Добавить метку" ng-click="addTag()"><span class="fa fa-check"></span></md-button>
+                <md-button aria-label="Добавить метку" 
+                           ng-disabled="!newTagText || newTagText.length < 1"
+                           ng-click="addTag()">
+                    <span class="fa fa-check"></span>
+                </md-button>
             </div>
 <!--            <tag-edit-form label="...или введите текст новой метки"/>-->
         </md-content>

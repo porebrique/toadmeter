@@ -68,7 +68,7 @@
             };
             
             $scope.addTag = function () {
-                if ($scope.newTagText.length > 0) {
+                if ($scope.newTagText && $scope.newTagText.length > 0) {
                     var newTag = $scope.tags.$create({text: $scope.newTagText, type: $scope.type});
                     $scope.newTagText = null;
                 }
