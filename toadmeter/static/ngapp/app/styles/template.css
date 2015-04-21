@@ -19,6 +19,7 @@ body {
 
 .site-sidenav .navlinks li .fa {
     font-size: 1.8rem;
+    width: 1.4em;
 }
 
 .site-sidenav .navlinks li .fa-money {

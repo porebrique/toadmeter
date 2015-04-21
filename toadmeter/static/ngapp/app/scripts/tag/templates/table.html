@@ -1,22 +1,30 @@
- <table class="tm-table">
+ <table class="tm-table tags-list">
 
-        <tr ng-repeat="tag in tags">
+        <tr ng-repeat="tag in tags" ng-class="{'edit-mode': tag.$isEdited}">
             
-<!--
-            <td>
-                <span ng-show="tag.type === 'out'" class="fa fa-arrow-circle-o-down"></span>
-                <span ng-show="tag.type === 'in'" class="fa fa-arrow-circle-o-up"></span>
+            <td class="text-widget">
+                <div class="text-input">
+                    <md-input-container>
+                        <input focus-when="tag.$isEdited" ng-model="tag.text" type="text" placeholder="{{tag.text}}" on-enter="editTag(tag)" />
+                    </md-input-container>        
+                </div>                    
+                <span class="text-display">{{tag.text}}</span>
             </td>
--->
-            <td>{{tag.text}}</td>
             <td>
+                <span>
+                </span>
+                
+                <span>
+                </span>
                 <md-button class="md-raised"
                            aria-label="edit {{tag.text}}"
                            ng-click="editTag(tag)">
                     <span class="fa fa-pencil"></span>
+                    <span class="fa fa-check"></span>
                 </md-button>
                 <md-button class="md-raised md-warn"
                            aria-label="delete {{tag.text}}"
+                           ng-hide="tag.$isEdited"
                            ng-click="deleteTag(tag)">
                     <span class="fa fa-remove"></span>
                 </md-button>                

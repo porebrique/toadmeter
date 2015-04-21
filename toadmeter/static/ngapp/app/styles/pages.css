@@ -1,0 +1,30 @@
+.tags-list {
+
+}
+
+
+.tags-list .text-widget {
+    min-width: 15em;
+}
+
+.tags-list md-input-container {
+    padding-left: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+.tags-list md-input-container input {
+    padding-left: 0;
+}
+
+.tags-list .edit-mode .fa-check,
+.tags-list .edit-mode .text-input {
+    display: block;
+}
+
+.tags-list .edit-mode .fa-pencil,
+.tags-list .text-input,
+.tags-list .fa-check,
+.tags-list .edit-mode .text-display {
+    display: none;
+}
