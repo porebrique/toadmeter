@@ -26,8 +26,9 @@
                         getOrCreate: function (id) {
                             var Model = this,
                                 obj;
-                            if (ng.isDefined(id)) {
-                                console.log('defined id', id);
+                            id = parseInt(id, 10);
+                            if (!isNaN(id) && ng.isNumber(id)) {
+//                                console.log('defined id', id);
                                 obj = Model.$find(id);
                             } else {
                                 obj = Model.$build();

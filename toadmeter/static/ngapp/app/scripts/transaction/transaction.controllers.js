@@ -35,11 +35,14 @@
     mdl.controller('Transaction.EditCtrl', ['$q', '$scope', '$state', '$stateParams', 'Auth', 'Transaction', 'Tag',
         function ($q, $scope, $state, $stateParams, Auth, Transaction, Tag) {
 
-            //            console.log($scope.type);
+            var listUrl = {
+                "in": 'secure.incomes.list',
+                "out": 'secure.costs.list'
+            };
+//            console.log($scope.type);
+            
             $scope.transaction = Transaction.getOrCreate($stateParams.transaction_id);
-            $scope.tags = Tag.$collection({
-                type: $scope.type
-            });
+            $scope.tags = Tag.$collection({type: $scope.type});
             $scope.tags.$refresh();
 
             $scope.save = function () {
@@ -47,11 +50,7 @@
                 $scope.transaction
                     .$save()
                     .$then(function () {
-                        var url = {
-                            "in": 'secure.incomes.list',
-                            "out": 'secure.costs.list'
-                        }[$scope.type];
-                        $state.go(url);
+                        $state.go(listUrl[$scope.type]);
                     });
             };
 
@@ -72,6 +71,12 @@
                     var newTag = $scope.tags.$create({text: $scope.newTagText, type: $scope.type});
                     $scope.newTagText = null;
                 }
+            };
+            $scope.remove = function () {
+                $scope.transaction.$destroy()
+                    .$then(function () {
+                        $state.go(listUrl[$scope.type]);
+                    });
             };
 
         }]);

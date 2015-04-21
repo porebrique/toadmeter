@@ -62,7 +62,7 @@
 
 
     
-<md-content layout="row" class="md-padding" style="overflow: visible">
+<md-content layout="row" class="md-padding buttons" style="overflow: visible">
     <md-button ng-click="save()" 
                aria-label="save"
                ng-disabled="transaction_form.$invalid"
@@ -72,6 +72,12 @@
         </span>
         <span spinner-when="is.saving"><span class="fa fa-check"></span></span>
     </md-button>
+    <md-button ng-click="remove()" 
+               aria-label="delete"
+               ng-if="::transaction.id"
+               class="md-warn md-raised">
+        <span spinner-when="is.deleting"><span class="fa fa-trash"></span></span>
+    </md-button>    
 </md-content>
 
 
