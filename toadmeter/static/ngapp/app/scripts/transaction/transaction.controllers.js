@@ -1,4 +1,4 @@
-/*global angular, console, Highcharts */
+/*global angular, console, moment, Highcharts */
 (function (ng) {
     'use strict';
     var mdl = ng.module('TransactionModule');
@@ -32,8 +32,8 @@
             };
         }]);
 
-    mdl.controller('Transaction.EditCtrl', ['$q', '$scope', '$state', '$stateParams', 'Auth', 'Transaction', 'Tag',
-        function ($q, $scope, $state, $stateParams, Auth, Transaction, Tag) {
+    mdl.controller('Transaction.EditCtrl', ['$q', '$scope', '$state', '$stateParams', '$filter', 'Auth', 'Transaction', 'Tag',
+        function ($q, $scope, $state, $stateParams, $filter, Auth, Transaction, Tag) {
 
             var listUrl = {
                 "in": 'secure.incomes.list',
@@ -41,23 +41,30 @@
             };
 //            console.log($scope.type);
             
-            $scope.transaction = Transaction.getOrCreate($stateParams.transaction_id);
-            $scope.tags = Tag.$collection({type: $scope.type});
-            $scope.tags.$refresh();
-
-            $scope.save = function () {
-                $scope.transaction.type = $scope.type;
-                $scope.transaction
-                    .$save()
-                    .$then(function () {
-                        $state.go(listUrl[$scope.type]);
-                    });
+            $scope.getSelectDateText = function () {
+                return $scope.datetype === 'select' ? $filter('date')($scope.transaction.date, 'dd.MM.yyyy') : 'Выбрать дату';
             };
-
+            $scope.setDate = function (what) {
+                
+                switch (what) {
+                case 'yesterday':
+                    $scope.transaction.date = moment().subtract(1, 'days');
+                    $scope.datetype = 'yesterday';
+                    break;
+                case 'today':
+                    $scope.transaction.date = moment();
+                    $scope.datetype = 'today';
+                    break;
+                case 'select':
+                    $scope.datetype = 'select';
+                    $scope.datepicker = false;
+                    break;
+                }
+            };
+            
             $scope.appendDigit = function (what) {
                 var size = $scope.transaction.size;
                 size = ng.isUndefined(size) ? '' : size.toString();
-                
                 if (ng.isNumber(what)) {
                     size = size + what.toString();
                 } else {
@@ -72,12 +79,36 @@
                     $scope.newTagText = null;
                 }
             };
+            
+            $scope.save = function () {
+                $scope.transaction.type = $scope.type;
+                $scope.transaction.date = moment($scope.transaction.date).format('YYYY-MM-DD');
+                $scope.transaction
+                    .$save()
+                    .$then(function () {
+                        $state.go(listUrl[$scope.type]);
+                    });
+            };
+            
             $scope.remove = function () {
                 $scope.transaction.$destroy()
                     .$then(function () {
                         $state.go(listUrl[$scope.type]);
                     });
             };
+            
+            /* ----------------------------------------- */
+            
+            $scope.transaction = Transaction.getOrCreate($stateParams.transaction_id);
+            $scope.transaction.$then(function (response) {
+                if ($scope.transaction.date) {
+                    $scope.setDate('select');
+                } else {
+                    $scope.setDate('today');
+                }
+            });
+            $scope.tags = Tag.$collection({type: $scope.type});
+            $scope.tags.$refresh();
 
         }]);
 
@@ -101,7 +132,7 @@
             
             
             $scope.getSumFor = function (date) {
-                console.log(date);
+//                console.log(date);
                 var sum = 0,
                     selection = $filter('where')($scope.transactions, {date: date});
                 ng.forEach(selection, function (ta) {

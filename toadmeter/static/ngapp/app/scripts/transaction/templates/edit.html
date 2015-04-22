@@ -1,39 +1,46 @@
-<form name="transaction_form">
+<form name="transaction_form" class="transaction-edit">
 
 <div layout="row">
     <div flex-gt-md="50" flex-gt-sm="75" flex-sm>
+<!--    <div style="width: 10em">-->
         <md-content class="md-padding">
-            <div layout="column" layout-sm="column">
-                <div>
-                <md-input-container>
-                    <label>Число</label>
-                    <input ng-model="transaction.size" type="text" placeholder="число" ng-pattern="/\d+/" required/>
-                </md-input-container>
+            <div layout="row" layout-sm="column">
+                <div class="sum-input">
+                    <md-input-container>
+                        <label>Число</label>
+                        <input ng-model="transaction.size" type="text" placeholder="число" ng-pattern="/\d+/" required/>
+                    </md-input-container>
+                    
+                    <tm-numpad></tm-numpad>
+                     
+<!--                    date: {{transaction.date | date:'dd.MM.yy'}}-->
+                </div>  
+                <div class="date-input">
+                    
+                    <div layout="row" layout-align="center center">
+                        <md-button type="button" aria-label="yesterday"
+                                   ng-class="{'md-accent': datetype === 'yesterday'}"
+                                   ng-click="setDate('yesterday')">Вчера</md-button>
+                        <md-button type="button" aria-label="today"
+                                   ng-class="{'md-accent': datetype === 'today'}"
+                                   ng-click="setDate('today')" >Сегодня</md-button>
+                        <md-button type="button" aria-label="other date"
+                                   ng-class="{'md-accent': datetype === 'select'}"
+                                   ng-click="datepicker = !datepicker">
+                            {{getSelectDateText()}}
+                        </md-button>
+                    </div>
+                    <div ng-show="datepicker">
+                        <time-date-picker ng-model="transaction.date" 
+                                          display-mode="date" 
+                                          on-cancel="datepicker = false" 
+                                          on-save="setDate('select')"></time-date-picker>
+                    </div>
                 </div>
-        <div class="numpad">        
-            <div class="numpad-row">
-                <md-button class="md-raised" type="button" ng-click="appendDigit(1)" tabindex="-1">1</md-button>
-                <md-button class="md-raised" type="button" ng-click="appendDigit(2)" tabindex="-1">2</md-button>
-                <md-button class="md-raised" type="button" ng-click="appendDigit(3)" tabindex="-1">3</md-button>
-            </div>
-            <div class="numpad-row">
-                <md-button class="md-raised" type="button" ng-click="appendDigit(4)" tab-index="-1">4</md-button>
-                <md-button class="md-raised" type="button" ng-click="appendDigit(5)">5</md-button>
-                <md-button class="md-raised" type="button" ng-click="appendDigit(6)">6</md-button>
-            </div>
-            <div class="numpad-row">
-                <md-button class="md-raised" type="button" ng-click="appendDigit(7)">7</md-button>
-                <md-button class="md-raised" type="button" ng-click="appendDigit(8)">8</md-button>
-                <md-button class="md-raised" type="button" ng-click="appendDigit(9)">9</md-button>
-            </div>
-            <div class="numpad-row">
-                <md-button class="md-raised" type="button" ng-click="appendDigit(0)">0</md-button>
-                <md-button class="md-raised backspace" 
-                           type="button" aria-label="backspace" ng-click="appendDigit(null)"><span class="fa fa-arrow-left"/></md-button>
-            </div>
-                </div>              
             </div>            
         </md-content>
+        
+        <md-divider></md-divider>
         
         <md-content class="md-padding">
             <input type="hidden" ng-model="transaction.tag" required />
@@ -57,6 +64,9 @@
             </div>
 <!--            <tag-edit-form label="...или введите текст новой метки"/>-->
         </md-content>
+        
+        <md-divider></md-divider>
+        
     </div>
 </div>
 
@@ -65,7 +75,7 @@
 <md-content layout="row" class="md-padding buttons" style="overflow: visible">
     <md-button ng-click="save()" 
                aria-label="save"
-               ng-disabled="transaction_form.$invalid"
+               ng-disabled="transaction_form.$invalid || datepicker"
                class="md-primary md-raised">
         <span ng-show="transaction_form.$invalid">
             <md-tooltip style="margin-top: -30px;">Нужно указать сумму и метку</md-tooltip>

@@ -69,6 +69,7 @@ class TransactionSerializer(serializers.ModelSerializer):
         fields = ('id', 'size', 'date', 'type', 'tag')
 
     def create(self, validated_data):
+        print 'create transaction'
         user = self.context['request'].user
         validated_data['owner'] = user
         return Transaction.objects.create(**validated_data)        

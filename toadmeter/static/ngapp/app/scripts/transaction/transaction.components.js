@@ -3,6 +3,19 @@
     'use strict';
     var mdl = ng.module('TransactionModule');
     
+    mdl.directive('tmNumpad', ['APP_ROOT_FOLDER',
+        function (ROOT) {
+            return {
+                restrict: 'E',
+                templateUrl: ROOT + 'transaction/templates/numpad.html',
+//                scope: {},
+//                controller: 'Transaction.StatsCtrl',
+                link: function () {
+                }
+            };
+            
+        }]);
+    
     mdl.directive('transactionsStats', ['APP_ROOT_FOLDER',
         function (ROOT) {
             return {

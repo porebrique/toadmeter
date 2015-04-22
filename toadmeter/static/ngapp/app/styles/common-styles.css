@@ -76,6 +76,7 @@ button .spinner .fa {
 
 
 .numpad {
+    float: left;
 }
 
 .numpad .numpad-row {
