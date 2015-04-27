@@ -44,7 +44,7 @@
                 template: '<user-list />'
             })
             .state('public.reg', {
-                url: '',
+                url: 'reg',
                 template: '<auth-registration />'
             })
             .state('public.login', {

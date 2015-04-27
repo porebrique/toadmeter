@@ -30,7 +30,8 @@
                 }
             };
             
-        }]);    
+        }]);
+    
     mdl.directive('authRegistration', ['$location', '$state', 'APP_ROOT_FOLDER', 'Auth',
         function ($location, $state, ROOT, Auth) {
             return {

@@ -6,7 +6,7 @@ from rest_framework import routers
 
 from toadmeter.api.users import UserViewSet
 
-from toadmeter.api.auth import login_view, logout_view
+from toadmeter.api.auth import reg_view, login_view, logout_view
 from toadmeter.api.transactions import TransactionViewSet, TagViewSet, StatViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -26,6 +26,7 @@ urlpatterns = [
 #    url(r'^config/$', ConfigView.as_view(), name='config'),
 #    url(r'^config$', ConfigView.as_view(), name='config'),
     url(r'^login', login_view, name="login"),
+    url(r'^reg', reg_view, name="reg"),
     url(r'^logout', logout_view, name="logout"),
     
     url(r'^', include(router.urls)),

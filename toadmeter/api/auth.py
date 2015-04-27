@@ -1,18 +1,31 @@
 from django.views.decorators.csrf import csrf_exempt
 
-from django.contrib.auth import authenticate, login, logout
+from django.db import IntegrityError
+
+from django.contrib import auth 
+from django.contrib.auth.models import User
 from toadmeter.libs.decorators import json_view
 import json
 
 from toadmeter.api.users import UserSerializer
 
-from rest_framework import status
-from rest_framework.response import Response
+#from rest_framework import status
+#from rest_framework.response import Response
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
+
+def reg_view(request):
+    data = json.loads(request.body)
+    username = data['username']
+    password = data['password']
+    try:
+        user = User.objects.create_user(username, None, password)
+    except IntegrityError as error:
+        return HttpResponseBadRequest(json.dumps('Username "%s" is not available' % username), content_type="application/json" )
+    return HttpResponse(json.dumps('user created'), content_type="application/json" )    
 
 @json_view
 def logout_view(request):
-    logout(request)
+    auth.logout(request)
     return 'Logged out.'
 
 #@json_view
@@ -25,7 +38,7 @@ def login_view(request):
 #    print 'session is', request.session
     
     if username and password:
-        user = authenticate(username=username, password=password)
+        user = auth.authenticate(username=username, password=password)
 #        print 'remember is', remember
         if not remember:
             request.session.set_expiry(0)
@@ -34,7 +47,7 @@ def login_view(request):
 #        print 'user is',  user
         if user is not None:
             if user.is_active:
-                login(request, user)
+                auth.login(request, user)
                 jsonDict = {'user': UserSerializer(user).data}
                 return HttpResponse(json.dumps(jsonDict), content_type="application/json" )
             else:

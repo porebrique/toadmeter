@@ -55,10 +55,28 @@
 
         }]);
 
-    mdl.controller('auth.RegCtrl', ['$scope', '$location', '$state', 'Auth',
-        function ($scope, $location, $state, Auth) {
+    mdl.controller('auth.RegCtrl', ['$scope', '$location', '$state', 'Auth', 'User',
+        function ($scope, $location, $state, Auth, User) {
+            
+//            $scope.user = User.$build();
+            
             $scope.submit = function () {
-                console.log('Submitting new user');
+                $scope.error = null;
+                Auth.reg($scope.user)
+                    .then(function (response) {
+//                        console.log('got reponse from Auth.reg', response);
+                        Auth.login($scope.user);
+                    })
+                    .catch(function (error) {
+                        console.log('error is', error);
+                        if (error.status === 500) {
+                            $scope.error = 'KABOOM! 500';
+                        } else {
+                            $scope.error = error.data;
+                        }
+                        
+                        
+                    });
             };
             
         }]);

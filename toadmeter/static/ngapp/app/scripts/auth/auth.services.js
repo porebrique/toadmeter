@@ -63,6 +63,14 @@
                 storage.reset();
             }
             
+            function reg(user) {
+                return $http.post('/api/reg', user)
+                    .then(function (response) {
+//                        console.log('got response from reg_view', response);
+                        return response;
+                    });
+            }
+            
             function logout() {
                 return $http.delete('/api/logout')
                     .then(function (response) {
@@ -80,9 +88,11 @@
             
 
             function checkAuthentication(event, toState, toParams, fromState, fromParams) {
+//                console.log(toState.name);
                 if (toState.data.secure && !isLogged()) {
 //                    console.log('triyn to get to secure state while not logged');
                     event.preventDefault();
+                    
                     if (fromState.name === 'login') {
 //                        console.log('jsut refreshing login page');
                         $state.reload();
@@ -100,6 +110,7 @@
             storage = new StorageConstructor();
             
             return {
+                reg: reg,
                 login: login,
                 logout: logout,
                 getUser: getUser,
