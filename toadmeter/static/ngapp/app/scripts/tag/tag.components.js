@@ -4,16 +4,26 @@
     var mdl = ng.module('TagModule');
     
     
-    mdl.directive('tagsList', ['APP_ROOT_FOLDER', 'Tag',
-        function (ROOT, Tag) {
+    mdl.directive('tagsList', ['$q', '$filter', 'APP_ROOT_FOLDER', 'Tag',
+        function ($q, $filter, ROOT, Tag) {
             return {
                 restrict: 'E',
                 templateUrl: ROOT + 'tag/templates/list.html',
                 scope: {},
 //                controller: 'Tag.ListCtrl',
                 controller: function ($scope) {
-                    $scope.incomes = Tag.$collection({type: 'in'}).$refresh();
-                    $scope.costs = Tag.$collection({type: 'out'}).$refresh();
+                    
+//                    $q.all([Tag.$collection({type: 'in'}).$refresh()]);
+                    
+//                    $scope.incomes = Tag.$collection({type: 'in'}).$refresh();
+//                    $scope.costs = Tag.$collection({type: 'out'}).$refresh();
+                    
+                    Tag.$collection()
+                        .$refresh()
+                        .$then(function (response) {
+                            $scope.incomes = $filter('where')(response, {type: 'in'});
+                            $scope.expenses = $filter('where')(response, {type: 'out'});
+                        });
                 },
                 link: function () {
                 }
