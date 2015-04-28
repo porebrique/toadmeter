@@ -8,8 +8,6 @@
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
                 Auth.checkAuthentication(event, toState, toParams, fromState, fromParams);
             });
-            $rootScope.auth = $localStorage.auth;
-            
         }]);
 
 

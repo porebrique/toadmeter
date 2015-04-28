@@ -3,8 +3,8 @@
     'use strict';
     var mdl = ng.module('AuthModule');
 
-    mdl.controller('auth.LogoutCtrl', ['$scope', '$state', 'Auth',
-        function ($scope,  $state, Auth) {
+    mdl.controller('auth.LogoutCtrl', ['$scope', '$timeout', '$state', 'Auth',
+        function ($scope, $timeout,  $state, Auth) {
             
             $scope.logout = function () {
                 Auth.logout()

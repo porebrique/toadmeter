@@ -13,19 +13,28 @@
             
             function StorageConstructor() {
                 var self = this,
-                    storageService = $localStorage,
-                    storage;
+                    storage,
+                    storageService = $localStorage;
+//                self.storage;
                 
-                if (ng.isUndefined(storageService.auth)) {
-                    storageService.auth = {};
+//                console.log('before init storageService.auth is', storageService.auth);
+                
+                function init() {
+                    if (ng.isUndefined(storageService.auth)) {
+                        storageService.auth = {};
+                    }
+                    storage = storageService.auth;
+                    $rootScope.auth = $localStorage.auth;
                 }
                 
-                storage = storageService.auth;
+                init();
                 
                 self.get = function (what) {
                     if (ng.isUndefined(storage[what])) {
+                        console.log('und!');
                         storage[what] = false;
                     }
+//                    console.log(storage);
                     return storage[what];
                 };
                 
@@ -33,9 +42,20 @@
                     storage[name] = value;
                 };
                 
+                
+
+                
                 self.reset = function () {
                     delete storageService.auth;
-                    delete $rootScope.auth;
+                    
+//                    console.log('after reset storageService.auth is', storageService.auth);
+//                    storage = {};
+//                    console.log('and self.storage is', storage);
+//                    delete $rootScope.auth;
+//                    console.log('after reset $rootScope.auth is', $rootScope.auth);
+                    init();
+                    
+//                    $rootScope.auth = {};
                 };
             
             }
@@ -47,6 +67,13 @@
             
             /*  Public methods  */
             
+            function reg(user) {
+                return $http.post('/api/reg', user)
+                    .then(function (response) {
+                        return response;
+                    });
+            }
+            
             function login(user) {
                 return $http.post('/api/login', user)
                     .then(function (response) {
@@ -54,23 +81,21 @@
                         storage.set('user', response.data.user);
                         var destination = desiredState ? desiredState.name : 'secure.incomes.list';
                         desiredState = null;
-                    
+                        // Not sure if timeout is useful
                         $state.go(destination);
+                        
                     });
             }
             
             function clearUser() {
+//                console.log('clear user, storage before:', storage);
                 storage.reset();
+                $timeout(function () {
+//                console.log('clear user, after:', storage);
+                }, 500);
             }
             
-            function reg(user) {
-                return $http.post('/api/reg', user)
-                    .then(function (response) {
-//                        console.log('got response from reg_view', response);
-                        return response;
-                    });
-            }
-            
+
             function logout() {
                 return $http.delete('/api/logout')
                     .then(function (response) {
@@ -78,7 +103,7 @@
 //                        console.log('logged out. going to logout ok page');
                     })
                     .catch(function (error) {
-                        console.log('logout errors:', error);
+                        console.error('logout errors:', error);
                     });
             }
             
@@ -89,6 +114,7 @@
 
             function checkAuthentication(event, toState, toParams, fromState, fromParams) {
 //                console.log(toState.name);
+//                console.log('isLogged is', isLogged());
                 if (toState.data.secure && !isLogged()) {
 //                    console.log('triyn to get to secure state while not logged');
                     event.preventDefault();
