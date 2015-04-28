@@ -60,7 +60,14 @@
                 data: {
                     pageName: 'Статистика расходов'
                 }
+            })
+            .state('secure.costs.import', {
+                url: 'import',
+                template: '<transactions-import />',
+                data: {
+                    pageName: 'Импорт csv'
+                }
             });
-    //            
+        
     }]);
 }(angular));
