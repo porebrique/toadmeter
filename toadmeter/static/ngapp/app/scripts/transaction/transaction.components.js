@@ -30,6 +30,7 @@
                     
                     $scope.upload = function () {
                         $scope.error = null;
+                        $scope.message = null;
                         
                         $http.post('/api/transactions/upload/', {format: $scope.format, csv: $scope.csv})
                             .then(function (response) {

@@ -3,13 +3,14 @@ import django_filters
 from rest_framework import serializers, viewsets, filters, exceptions, permissions, response, status, decorators
 
 from time import sleep
-from toadmeter.libs.csv_reader import UnicodeCsvReader
+#from toadmeter.libs.csv_reader import UnicodeCsvReader
 from django.db import models
 
 from django.contrib.auth.models import User
 from toadmeter.transactions.models import Transaction, Tag
 
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
+from toadmeter.transactions.parsers import CSVParser
 
 class StatSerializer(serializers.ModelSerializer):
     sum = serializers.SerializerMethodField()
@@ -76,30 +77,6 @@ class TransactionSerializer(serializers.ModelSerializer):
         validated_data['owner'] = user
         return Transaction.objects.create(**validated_data)        
         
-#-------        
-#class UnicodeCsvReader(object):
-#    def __init__(self, f, encoding="utf-8", **kwargs):
-#        self.csv_reader = csv.reader(f, **kwargs)
-#        self.encoding = encoding
-#
-#    def __iter__(self):
-#        return self
-#
-#    def next(self):
-#        # read and split the csv row into fields
-#        row = self.csv_reader.next() 
-#        # now decode
-#        return [unicode(cell, self.encoding) for cell in row]
-#
-#    @property
-#    def line_num(self):
-#        return self.csv_reader.line_num
-#
-#class UnicodeDictReader(csv.DictReader):
-#    def __init__(self, f, encoding="utf-8", fieldnames=None, **kwds):
-#        csv.DictReader.__init__(self, f, fieldnames=fieldnames, **kwds)
-#        self.reader = UnicodeCsvReader(f, encoding=encoding, **kwds)
-#-------        
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
@@ -117,42 +94,11 @@ class TransactionViewSet(viewsets.ModelViewSet):
         format = request.DATA.get('format', None)
         
         if csv_data:
-            if format == 'toshl':
-                csv_data = csv_data.split('\n')
-                counters = {
-                    'added': 0,
-                    'ignored': 0
-                }
-                print 'csv_data:', len(csv_data), csv_data
-                for row in UnicodeCsvReader(csv_data):
-                    print 'row', row
-                    date = row[0]
-                    tagname = row[1]
-                    if row[2]:
-                        size = float(row[2].replace(',', '.'))
-                        type = 'out'
-                    elif row[3]:
-                        size = float(row[3].replace(',', '.'))
-                        type = 'in'
-                    else:
-                        pass 
-                    tags = Tag.objects.filter(text__iexact=tagname)
-                    print date, type, size, ':', tags
-
-                    if tags:
-                        tag = tags[0]
-                    else:
-                        tag = Tag.objects.create(text=tagname, owner=request.user, type=type)
-                    matched_transactions = Transaction.objects.filter(size=size, type=type, tag=tag, date=date)
-                    if not matched_transactions:
-                        Transaction.objects.create(date=date, type=type, tag=tag, size=size, owner=request.user)
-                        counters['added'] = counters['added'] + 1;
-                    else:
-                        counters['ignored'] = counters['ignored'] + 1;
-#                        print 'There already is transaction with equal date, type, tag and size, ignoring this one.'
+            results = CSVParser.parse(format, csv_data)
+            if results['status'] < 1:
+                return response.Response(results['message'])
             else:
-                return response.Response('Unknown import format "%s"' % format, status=status.HTTP_400_BAD_REQUEST)
-            return response.Response('%i entries added, %i ignored as already existing' % (counters['added'], counters['ignored']))   
+                return response.Response(results['message'], status=status.HTTP_400_BAD_REQUEST) 
         else:
             return response.Response('No csv provided', status=status.HTTP_400_BAD_REQUEST)
          
