@@ -7,7 +7,9 @@ from rest_framework import routers
 from toadmeter.api.users import UserViewSet
 
 from toadmeter.api.auth import reg_view, login_view, logout_view
-from toadmeter.api.transactions import TransactionViewSet, TagViewSet, StatViewSet
+from toadmeter.api.transactions import TransactionViewSet
+from toadmeter.api.tags import TagViewSet
+from toadmeter.api.stats import StatViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
