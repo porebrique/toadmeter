@@ -5,7 +5,6 @@ from time import sleep
 from toadmeter.transactions.models import Tag
 #from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
 
-
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag

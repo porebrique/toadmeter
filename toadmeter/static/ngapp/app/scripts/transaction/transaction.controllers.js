@@ -113,6 +113,94 @@
         }]);
 
 
+    mdl.controller('Transaction.PeriodFilterCtrl', ['$q', '$scope', '$state', '$filter', 'Transaction', 'Tag',
+        function ($q, $scope, $state, $filter, Transaction, Tag) {
+   
+            function resetPeriod() {
+                $scope.period.code = 'current';
+                $scope.period.data.month = null;
+                $scope.period.data.year = moment().year();
+            }
+            
+            function buildFilter() {
+                var now = 2015,
+                    year = moment(),
+                    month,
+                    years = [],
+                    months = [],
+                    count = 0;
+
+                $scope.period = {
+                    variants: [
+                        ['last', 'Last month'],
+                        ['current', 'Current month'],
+                        ['custom', 'Choose month']
+                    ],
+                    data: {},
+                    options: {}
+                };
+                
+                resetPeriod();
+                
+                do {
+                    years.push(year.year());
+                    year.subtract(1, 'year');
+//                    console.log('adding', year.year(), 'now is', now);
+                } while (year.year() >= now);
+                do {
+                    count += 1;
+                    months.push(moment().month(count).format("MMMM"));
+                } while (count < 12);
+//                years.push(2011);
+                $scope.period.options.years = years;
+                $scope.period.options.months = months;
+                
+            }
+            
+            buildFilter();
+            
+            $scope.setPeriod = function (code) {
+                if (code !== $scope.period.code) {
+                    var request_period;
+                    $scope.period.code = code;
+                    if (code === 'last' || code === 'current') {
+                        $scope.getOtherMonth(code);
+                    }
+                }
+            };
+            
+            $scope.$watch('period.data', function (newValue) {
+                if ($scope.period.code === 'custom' && newValue.year && newValue.month) {
+                    $scope.getOtherMonth('custom');
+                }
+            }, true);
+            
+            $scope.getOtherMonth = function (request) {
+                var period,
+                    lastmonth;
+//                console.log(request);
+                
+                switch (request) {
+                case 'last':
+                    lastmonth = moment().subtract(1, 'month');
+                    period = (lastmonth.month() + 1) + '.' + lastmonth.year();
+                    break;
+                case 'current':
+                    period = null;
+                    resetPeriod();
+                    break;
+                case 'custom':
+//                    console.log($scope.period.data);
+                    console.log($scope.period.data.month, typeof $scope.period.data.month);
+                    period = parseInt($scope.period.data.month, 10) + 1 + '.' + $scope.period.data.year;
+                    break;
+                }
+                console.log(period);
+                $scope.list.$refresh({period: period});
+            };
+                    
+        }]);
+    
     mdl.controller('Transaction.ListCtrl', ['$q', '$scope', '$state', '$filter', 'Auth', 'Transaction', 'Tag',
         function ($q, $scope, $state, $filter, Auth, Transaction, Tag) {
             
@@ -132,7 +220,6 @@
             
             
             $scope.getSumFor = function (date) {
-//                console.log(date);
                 var sum = 0,
                     selection = $filter('where')($scope.transactions, {date: date});
                 ng.forEach(selection, function (ta) {

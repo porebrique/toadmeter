@@ -4,7 +4,8 @@ from rest_framework import serializers, viewsets, filters, exceptions, permissio
 from toadmeter.transactions.models import Transaction
 from toadmeter.transactions.parsers import CSVParser
 #from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
-
+from datetime import datetime
+import calendar
     
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,15 +26,34 @@ class TransactionViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     
     def get_queryset(self):
-        return self.queryset.filter(owner=self.request.user)
+        period = self.request.GET.get('period', 'default')
+        if period == 'default':
+            now = datetime.now()
+            period = {
+                'year': now.year,
+                'month': now.month
+            }            
+        else:
+            period = [int(i) for i in period.split('.')]
+            period = {
+                'year': period[1],
+                'month': period[0]
+            }
+        lastday = calendar.monthrange(period['year'], period['month'])[1]
+        from_date = '%s-%s-01' % (period['year'], period['month'])
+        to_date = '%s-%s-%s' % (period['year'], period['month'], lastday)
+#        print from_date, to_date
+        queryset = self.queryset.filter(owner=self.request.user, date__range=[from_date, to_date])
+        return queryset
     
     @decorators.list_route(methods=['post'])
     def upload(self, request):
         csv_data = request.DATA.get('csv', None).encode('utf-8')
         format = request.DATA.get('format', None)
+        user = request.user
         
         if csv_data:
-            results = CSVParser.parse(format, csv_data)
+            results = CSVParser.parse(format, csv_data, user)
             if results['status'] < 1:
                 return response.Response(results['message'])
             else:

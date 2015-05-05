@@ -9,7 +9,7 @@ class CSVParser():
     pass
     
     @classmethod
-    def parse(self, format, csv_data):
+    def parse(self, format, csv_data, user):
         
         formatProcessors = {
             'toshl': self.toshl  
@@ -31,7 +31,7 @@ class CSVParser():
         }
     
         for row in UnicodeCsvReader(csv_data):
-            row = processor(row)
+            row = processor(row, user)
             if row > 0:
                 counters['added'] += 1;
             else:
@@ -43,7 +43,7 @@ class CSVParser():
 
     
     @classmethod
-    def toshl(self, row):
+    def toshl(self, row, user):
         date = row[0]
         tagname = row[1]
         if row[2]:
@@ -56,10 +56,10 @@ class CSVParser():
         if tags:
             tag = tags[0]
         else:
-            tag = Tag.objects.create(text=tagname, owner=request.user, type=type)
+            tag = Tag.objects.create(text=tagname, owner=user, type=type)
         matched_transactions = Transaction.objects.filter(size=size, type=type, tag=tag, date=date)
         if not matched_transactions:
-            Transaction.objects.create(date=date, type=type, tag=tag, size=size, owner=request.user)
+            Transaction.objects.create(date=date, type=type, tag=tag, size=size, owner=user)
             return 1
         else:
             return 0

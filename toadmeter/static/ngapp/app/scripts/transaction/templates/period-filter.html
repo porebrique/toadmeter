@@ -1,0 +1,20 @@
+
+<div layout="column" style="float: left">
+    <div layout="row">
+        <md-button ng-repeat="variant in ::period.variants"
+                   ng-class="{'md-accent': period.code === variant[0]}"
+                   ng-click="setPeriod(variant[0])">
+            {{::variant[1]}}
+        </md-button>
+    </div>        
+
+    <div ng-show="period.code === 'custom'" layout="row" layout-align="end center">
+            <md-select ng-model="period.data.year" placeholder="year">
+                <md-option ng-repeat="year in period.options.years" value="{{year}}">{{year}}</md-option>
+            </md-select>
+            <md-select ng-model="period.data.month" placeholder="month">
+                <md-option ng-repeat="month in period.options.months" value="{{$index + 1}}">{{month}}</md-option>
+            </md-select>
+    </div>  
+    
+</div>    

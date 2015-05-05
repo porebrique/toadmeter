@@ -3,6 +3,21 @@
     'use strict';
     var mdl = ng.module('TransactionModule');
     
+    mdl.directive('transactionPeriodFilter', ['APP_ROOT_FOLDER',
+        function (ROOT) {
+            return {
+                restrict: 'E',
+                templateUrl: ROOT + 'transaction/templates/period-filter.html',
+                scope: {
+                    list: '='
+                },
+                controller: 'Transaction.PeriodFilterCtrl',
+                link: function () {
+                }
+            };
+            
+        }]);
+        
     mdl.directive('tmNumpad', ['APP_ROOT_FOLDER',
         function (ROOT) {
             return {
