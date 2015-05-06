@@ -1,3 +1,10 @@
+.stats-page .transaction-period-filter {
+    border: 1px solid silver;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin: 1em 0;
+}
+
 .tags-list {
 
 }

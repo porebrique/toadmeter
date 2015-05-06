@@ -1,13 +1,19 @@
-<div class="stats-page" ng-cloak>
-    <div ng-show="stats.length < 1 && stats.$pending.length < 0">
+<div class="stats-page" ng-cloak layout="row">
+    <div layout="column">
+        
+    <div layout="column">
+        <transaction-period-filter list="transactions"></transaction-period-filter>
+    </div>     
+    
+    <div ng-show="tags.length < 1 && tags.$pending.length < 0">
         <span ng-show="type === 'out'">Здесь будет статистика расходов. Когда они появятся.</span>
         <span ng-show="type === 'in'">Здесь будет статистика доходов. Когда они появятся.</span>
     </div>    
     
-    <md-tabs  md-border-bottom ng-show="stats.length > 0">
+    <md-tabs  md-border-bottom ng-show="tags.length > 0">
         <md-tab label="<span class='fa fa-pie-chart'></span>">
             <md-content class="md-padding">
-                <highchart id="stats-pie-chart" config="pieChartConfig"></highchart>
+                 <highchart id="stats-pie-chart" config="pieChartConfig"></highchart>
             </md-content>
         </md-tab>        
         <md-tab label="<span class='fa fa-bar-chart'></span>">
@@ -19,20 +25,19 @@
     </md-tabs>
         
     
-
-
-    
     <div class="tags">
-
         <span class="tag"
-              ng-repeat="tag in stats" 
-              nssssg-click="toggleTag(tag)">
-            <md-checkbox ng-model="tag.enabled" ng-change="toggleTag(tag)" class="md-primary" aria-label="Toggle {{tag.text}}">
+              ng-repeat="tag in tags | pick: 'sum > 0'">
+            <md-checkbox ng-model="tag.enabled" 
+                         ng-change="toggleTag(tag)" 
+                         class="md-primary" 
+                         aria-label="Toggle {{::tag.text}}">
               {{::tag.text}} ({{::tag.sum}})
-            </md-checkbox>            
+            </md-checkbox>         
+<!--            <span class="passive">{{::tag.text}} ({{::tag.sum}})</span>-->
         </span>
 
     </div>
 
-
+    </div>
 </div>

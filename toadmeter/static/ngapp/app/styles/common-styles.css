@@ -116,6 +116,20 @@ button .spinner .fa {
     text-transform: uppercase;
 }
 
+
+.stats-page .tag.disabled {
+    cursor: no-drop;
+    opacity: 0.5;
+}
+
+.stats-page .tag .passive,
+.stats-page .tag.disabled md-checkbox {
+    display: none;
+}
+.stats-page .tag.disabled .passive {
+    display: block;
+}
+
 .stats-page .tag .off{
 }
 

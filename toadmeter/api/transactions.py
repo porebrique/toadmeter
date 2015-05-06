@@ -4,8 +4,10 @@ from rest_framework import serializers, viewsets, filters, exceptions, permissio
 from toadmeter.transactions.models import Transaction
 from toadmeter.transactions.parsers import CSVParser
 #from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
-from datetime import datetime
-import calendar
+#from datetime import datetime
+#import calendar
+
+from toadmeter.api import utils as api_utils
     
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,24 +29,26 @@ class TransactionViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         period = self.request.GET.get('period', 'default')
-        if period == 'default':
-            now = datetime.now()
-            period = {
-                'year': now.year,
-                'month': now.month
-            }            
-        else:
-            period = [int(i) for i in period.split('.')]
-            period = {
-                'year': period[1],
-                'month': period[0]
-            }
-        lastday = calendar.monthrange(period['year'], period['month'])[1]
-        from_date = '%s-%s-01' % (period['year'], period['month'])
-        to_date = '%s-%s-%s' % (period['year'], period['month'], lastday)
-#        print from_date, to_date
-        queryset = self.queryset.filter(owner=self.request.user, date__range=[from_date, to_date])
-        return queryset
+        return api_utils.get_period_limited_queryset(self.queryset, period, self.request.user)
+#        period = self.request.GET.get('period', 'default')
+#        if period == 'default':
+#            now = datetime.now()
+#            period = {
+#                'year': now.year,
+#                'month': now.month
+#            }            
+#        else:
+#            period = [int(i) for i in period.split('.')]
+#            period = {
+#                'year': period[1],
+#                'month': period[0]
+#            }
+#        lastday = calendar.monthrange(period['year'], period['month'])[1]
+#        from_date = '%s-%s-01' % (period['year'], period['month'])
+#        to_date = '%s-%s-%s' % (period['year'], period['month'], lastday)
+##        print from_date, to_date
+#        queryset = self.queryset.filter(owner=self.request.user, date__range=[from_date, to_date])
+#        return queryset
     
     @decorators.list_route(methods=['post'])
     def upload(self, request):

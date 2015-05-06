@@ -9,14 +9,14 @@ from toadmeter.api.users import UserViewSet
 from toadmeter.api.auth import reg_view, login_view, logout_view
 from toadmeter.api.transactions import TransactionViewSet
 from toadmeter.api.tags import TagViewSet
-from toadmeter.api.stats import StatViewSet
+#from toadmeter.api.stats import StatViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'tags', TagViewSet)
 router.register(r'transactions', TransactionViewSet)
-router.register(r'stats', StatViewSet)
+#router.register(r'stats', StatViewSet)
 #router.register(r'config', ConfigView, base_name="config")
 
 # Wire up our API using automatic URL routing.

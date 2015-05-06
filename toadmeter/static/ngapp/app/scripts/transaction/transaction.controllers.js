@@ -3,31 +3,37 @@
     'use strict';
     var mdl = ng.module('TransactionModule');
 
-    mdl.controller('Transaction.StatsCtrl', ['$q', '$scope', '$state', 'Stat', 'Transaction', 'Tag', '$timeout',
-        function ($q, $scope, $state, Stat, Transaction, Tag, $timeout) {
+    mdl.controller('Transaction.StatsCtrl', ['$q', '$scope', '$timeout', 'Statistics', 'Transaction', 'Tag',
+        function ($q, $scope, $timeout,  Statistics, Transaction, Tag) {
 
             function redrawGraphs() {
-                $scope.pieChartConfig = Stat.getChartConfig('pie', $scope.stats);
-                $scope.columnChartConfig = Stat.getChartConfig('column', $scope.stats);
+                Statistics.updateData($scope.tags);
+                $scope.pieChartConfig = Statistics.getChartConfig('pie', $scope.stats);
+                $scope.columnChartConfig = Statistics.getChartConfig('column', $scope.stats);
             }
-            
-            Stat.$collection({type: $scope.type})
-                .$refresh()
-                .$then(function (response) {
-                    ng.forEach(response, function (tag) {
-                        tag.enabled = true;
-                    });
-//                    $scope.stats = Stat.prepareStats(response);
-                    $scope.stats = response;
-//                    console.log($scope.stats);
-                    Stat.updateData($scope.stats);
+
+            $q.all([Transaction.$collection({type: 'out'}).$refresh().$asPromise(), Tag.$collection({type: 'out'}).$refresh().$asPromise()])
+                .then(function (responses) {
+//                    responses[1] = Tag.annotateSum(responses[1], responses[0]);
+                    $scope.tags = Statistics.annotateSum(responses[1], responses[0]);
+                    $scope.transactions = responses[0];
+//                    Statistics.updateData($scope.tags);
                     redrawGraphs();
                 });
             
+            $timeout(function () {
+                $scope.$watchCollection('transactions', function (newValue) {
+//                    console.log('changed collections', newValue.length);
+                    $scope.tags = Statistics.annotateSum($scope.tags, newValue);
+//                    Statistics.updateData($scope.tags);
+                    redrawGraphs();
+                });
+            }, 1000);
+            
             
             $scope.toggleTag = function (tag) {
-                console.log('toggle tag');
-                Stat.updateData($scope.stats);
+//                console.log('toggle tag');
+//                Statistics.updateData($scope.tags);
                 redrawGraphs();
             };
         }]);
@@ -179,7 +185,7 @@
                 var period,
                     lastmonth;
 //                console.log(request);
-                
+//                console.log($scope.list);
                 switch (request) {
                 case 'last':
                     lastmonth = moment().subtract(1, 'month');
@@ -195,7 +201,7 @@
                     period = parseInt($scope.period.data.month, 10) + 1 + '.' + $scope.period.data.year;
                     break;
                 }
-                console.log(period);
+//                console.log(period);
                 $scope.list.$refresh({period: period});
             };
                     
