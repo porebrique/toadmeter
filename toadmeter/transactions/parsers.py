@@ -1,3 +1,4 @@
+import csv
 from toadmeter.libs.csv_reader import UnicodeCsvReader
 
 from toadmeter.transactions.models import Transaction, Tag
@@ -5,14 +6,18 @@ from toadmeter.transactions.models import Transaction, Tag
 #0: success
 #1: unsupported format
 
+
 class CSVParser():
     pass
     
     @classmethod
-    def parse(self, format, csv_data, user):
+    def parse(self, format, file, user):
         
         formatProcessors = {
-            'toshl': self.toshl  
+            'toshl': {
+                    'trim_first_line': True,
+                    'row_parser': self.toshl  
+            }
         }        
         processor = formatProcessors.get(format, None)
         
@@ -22,16 +27,24 @@ class CSVParser():
                 'message': 'unsupported format %s' % format
             }        
         
-        csv_data = csv_data.split('\n')[1:]
+        csv_data = file
+        print file, file.content_type
+        print dir(file)
+#        csv_data = csv_data.split('\n')[1:]
 #        csv_data = csv_data.split('\n')
-
+        
+        data = [row for row in csv.reader(file.read().splitlines())]
+        if processor['trim_first_line']:
+            data = data[1:]
+            
         counters = {
             'added': 0,
             'ignored': 0
         }
     
-        for row in UnicodeCsvReader(csv_data):
-            row = processor(row, user)
+#        for row in UnicodeCsvReader(csv_data):
+        for row in data:
+            row = processor['row_parser'](row, user)
             if row > 0:
                 counters['added'] += 1;
             else:

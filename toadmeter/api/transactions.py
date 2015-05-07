@@ -1,11 +1,9 @@
 # encoding: utf-8
 #import django_filters
-from rest_framework import serializers, viewsets, filters, exceptions, permissions, response, status, decorators
+from rest_framework import serializers, viewsets, filters, exceptions, permissions, response, status, decorators, parsers
 from toadmeter.transactions.models import Transaction
 from toadmeter.transactions.parsers import CSVParser
 #from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
-#from datetime import datetime
-#import calendar
 
 from toadmeter.api import utils as api_utils
     
@@ -26,32 +24,30 @@ class TransactionViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('type',) 
     permission_classes = (permissions.IsAuthenticated,)
+    parser_classes = (parsers.JSONParser, parsers.MultiPartParser)
     
     def get_queryset(self):
         period = self.request.GET.get('period', 'default')
         return api_utils.get_period_limited_queryset(self.queryset, period, self.request.user)
-#        period = self.request.GET.get('period', 'default')
-#        if period == 'default':
-#            now = datetime.now()
-#            period = {
-#                'year': now.year,
-#                'month': now.month
-#            }            
-#        else:
-#            period = [int(i) for i in period.split('.')]
-#            period = {
-#                'year': period[1],
-#                'month': period[0]
-#            }
-#        lastday = calendar.monthrange(period['year'], period['month'])[1]
-#        from_date = '%s-%s-01' % (period['year'], period['month'])
-#        to_date = '%s-%s-%s' % (period['year'], period['month'], lastday)
-##        print from_date, to_date
-#        queryset = self.queryset.filter(owner=self.request.user, date__range=[from_date, to_date])
-#        return queryset
     
     @decorators.list_route(methods=['post'])
-    def upload(self, request):
+    def upload(self, request, filename=None, format=None, pk=None):
+        file = request.FILES['file']
+        format = request.DATA.get('format', None)
+        user = request.user
+        print file, format
+        if file:
+            results = CSVParser.parse(format, file, user)
+            if results['status'] < 1:
+                return response.Response(results['message'])
+            else:
+                return response.Response(results['message'], status=status.HTTP_400_BAD_REQUEST) 
+        else:
+            return response.Response('No csv provided', status=status.HTTP_400_BAD_REQUEST)
+        return response.Response('ok')
+    
+    @decorators.list_route(methods=['post'])
+    def upload_OLD(self, request):
         csv_data = request.DATA.get('csv', None).encode('utf-8')
         format = request.DATA.get('format', None)
         user = request.user

@@ -1,31 +1,37 @@
 <form name="import_form" class="transaction-import" ng-submit="upload()">
 
+<!--
     <div layout="row">
         <md-radio-group ng-model="format" required>
               <md-radio-button value="toshl" class="md-primary">Toshl</md-radio-button>
         </md-radio-group>
     </div>    
-    <div layout="row">
-        <md-input-container>
-            <label>CSV copy-paste:</label>
-            <textarea ng-model="csv"></textarea>
-        </md-input-container>
+-->
+    
+    <div layout="column">
+        <div>
+            <md-button type="button" class="md-raised" ngf-select ng-model="files"> {{files.length ? files[0].name : 'Select file'}}</md-button>
+        </div>
+        <div style="opacity: 0.7; margin: 0.5em 0 1em 0; font-size: 80%">(currently only <strong>Toshl finance</strong> CSV format is supported)</div>
     </div>
-
-    <div layout="row" ng-show="message" style="margin-bottom: 2em;">
+    
+    <div layout="row" 
+         ng-show="message" 
+         ng-class="{error: error}"
+         style="margin-bottom: 2em;">
         {{message}}
     </div>   
-    <div layout="row" ng-show="error" class="error" style="margin-bottom: 2em;">
-        {{error}}
-    </div>    
     
+<!--
     <div layout="row">
         <md-button
+            ng-disabled="!(format && files.length)"
            class="md-primary md-raised"
             type="submit">
             OK
         </md-button>    
     </div>
+-->
 
 </form>
   

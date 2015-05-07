@@ -8,28 +8,28 @@
         
         var mix = {
             $extend: {
-                Record: {
-                    getTag: function (tags) {
-                        var self = this,
-                            tag = null;
-                        
-                        ng.forEach(tags, function (item) {
-                            if (item.id === self.tag) {
-                                tag = item;
-                            }
-                        });
-                        console.log(tag);
-                        return tag;
-                        
-                    }
-                }
-//                Model: {
-//                    privateModelMethod: function () {
-//                        console.log('this is private User model method');
+//                Record: {
+//                    getTag: function (tags) {
+//                        var self = this,
+//                            tag = null;
+//                        
+//                        ng.forEach(tags, function (item) {
+//                            if (item.id === self.tag) {
+//                                tag = item;
+//                            }
+//                        });
+//                        console.log(tag);
+//                        return tag;
+//                        
 //                    }
 //                }
+                Model: {
+                    getCSVUploadUrl: function () {
+                        return '/api/transactions/upload/';
+                    }
+                }
             }
         };
-        return RestmodTemplate.provideModel('transactions');
+        return RestmodTemplate.provideModel('transactions').mix(mix);
     }]);
 }(angular));

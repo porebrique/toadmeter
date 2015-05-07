@@ -29,6 +29,8 @@
         'restangular',
         'restmod',
         
+        'ngFileUpload',
+        
         'LibsModule',
         'AuthModule',
         'UserModule',

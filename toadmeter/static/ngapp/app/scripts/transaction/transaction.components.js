@@ -31,37 +31,14 @@
             
         }]);
     
-    mdl.directive('transactionsImport', ['$http', 'APP_ROOT_FOLDER',
-        function ($http, ROOT) {
+    mdl.directive('transactionsImport', ['APP_ROOT_FOLDER',
+        function (ROOT) {
             return {
                 restrict: 'E',
                 templateUrl: ROOT + 'transaction/templates/import.html',
 //                scope: {},
-//                controller: 'Transaction.ImportCtrl',
-                link: function ($scope) {
-                    
-                    $scope.format = 'toshl';
-                    $scope.csv = '';
-                    
-                    $scope.upload = function () {
-                        $scope.error = null;
-                        $scope.message = null;
-                        
-                        $http.post('/api/transactions/upload/', {format: $scope.format, csv: $scope.csv})
-                            .then(function (response) {
-//                                console.log('uploaded');
-                                $scope.message = response.data;
-                            })
-                            .catch(function (error) {
-                                if (error.status === 500) {
-                                    $scope.error = '500 some really unexpected error';
-                                } else {
-                                    $scope.error = error.data;
-                                }
-                            });
-                    };
-                    
-                }
+                controller: 'Transaction.ImportCtrl',
+                link: function () {}
             };
             
         }]);

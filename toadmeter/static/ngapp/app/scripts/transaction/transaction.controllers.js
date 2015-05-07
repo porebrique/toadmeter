@@ -3,6 +3,65 @@
     'use strict';
     var mdl = ng.module('TransactionModule');
 
+
+    mdl.controller('Transaction.ImportCtrl', ['$q', '$http', '$scope', 'Upload', 'Transaction',
+        function ($q, $http, $scope, Upload, Transaction) {
+
+            $scope.format = 'toshl';
+            $scope.csv = '';
+
+            $scope.$watch('files', function (newValue) {
+                if (newValue && newValue.length) {
+                    $scope.upload();
+                }
+            });
+            
+            $scope.upload = function () {
+                $scope.error = null;
+                $scope.message = null;
+                if ($scope.files && $scope.files.length) {
+
+                    var file = $scope.files[0];
+                    Upload.upload({
+                        url: Transaction.getCSVUploadUrl(),
+//                        fields: {'username': $scope.username},
+                        fields: {format: $scope.format},
+                        file: file
+                    }).success(function (data, status, headers, config) {
+                        $scope.message = file.name + ' ' + ' was uploaded, ' + data;
+                        $scope.files = null;
+                    }).error(function (error, status) {
+                        $scope.files = null;
+                        $scope.error = true;
+                        if (status === 500) {
+                            $scope.message = file.name + ' ' + ' was not uploaded due to some unexpected error. Is this file really CSV?';
+                        } else {
+                            $scope.message = error;
+                        }
+                    });
+                }
+            };
+
+//            $scope.uploadOLD = function () {
+//                $scope.error = null;
+//                $scope.message = null;
+//
+//                $http.post('/api/transactions/upload/', {format: $scope.format, csv: $scope.csv})
+//                    .then(function (response) {
+////                                console.log('uploaded');
+//                        $scope.message = response.data;
+//                    })
+//                    .catch(function (error) {
+//                        if (error.status === 500) {
+//                            $scope.error = '500 some really unexpected error';
+//                        } else {
+//                            $scope.error = error.data;
+//                        }
+//                    });
+//            };
+
+        }]);
+    
     mdl.controller('Transaction.StatsCtrl', ['$q', '$scope', '$timeout', 'Statistics', 'Transaction', 'Tag',
         function ($q, $scope, $timeout,  Statistics, Transaction, Tag) {
 
