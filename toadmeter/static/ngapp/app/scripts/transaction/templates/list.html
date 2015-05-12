@@ -1,20 +1,27 @@
 <div class="transactions-list" layout="row">
 <div flex-sm="100" flex-md="100" flex-lg="80" flex-gt-lg="50">
     
-<div layout="column" style="margin: 1em 0;">
+<div layout="row" layout-align="center center" layout-fill style="padding: 0 0.4rem;">
+        <div flex style="text-align: center;">
+            <md-button class="md-fab md-raised md-primary" aria-label="new transaction" ui-sref="{{::addButtonUrl}}">
+                <span class="fa fa-plus" />
+            </md-button>                
+        </div>    
+    <div flex>
     <transaction-period-filter list="transactions"></transaction-period-filter>
+    </div>
 </div>    
     
 <div layout="column">
 <!--<div layout="column">    -->
     <div flex="30">
-        <md-card>
-            <md-card-content>       
-                <md-button class="md-raised md-primary" aria-label="new transaction" ui-sref="{{::addButtonUrl}}">
-                    <span class="fa fa-plus" />
-                </md-button>                
-            </md-card-content>
-        </md-card>
+<!--
+        <div style="text-align: center; margin: 0 0 1.4rem;">
+            <md-button class="md-fab md-raised md-primary" aria-label="new transaction" ui-sref="{{::addButtonUrl}}">
+                <span class="fa fa-plus" />
+            </md-button>                
+        </div>
+-->
         <md-card ng-repeat="day in transactions | unique: 'date'" 
                  ng-class="{open: openDay === day}"
                  ng-click="toggle(day)">

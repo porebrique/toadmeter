@@ -256,7 +256,7 @@
                     break;
                 case 'custom':
 //                    console.log($scope.period.data);
-                    console.log($scope.period.data.month, typeof $scope.period.data.month);
+//                    console.log($scope.period.data.month, typeof $scope.period.data.month);
                     period = parseInt($scope.period.data.month, 10) + 1 + '.' + $scope.period.data.year;
                     break;
                 }

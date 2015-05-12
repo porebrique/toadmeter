@@ -5,14 +5,48 @@
     </md-toolbar>
      <md-content>
         <ul class="navlinks">
-            <li md-ink-ripple><a ui-sref="public.home" ui-sref-active="active"><span class="fa fa-home"/> </a></li>
-            <li md-ink-ripple><a ui-sref="secure.incomes.list" ui-sref-active="active"><span class="fa fa-arrow-circle-o-up"></span>Доходы</a></li>
-            <li md-ink-ripple><a ui-sref="secure.costs.list" ui-sref-active="active"><span class="fa fa-arrow-circle-o-down"></span>Расходы</a></li>
-            <li md-ink-ripple><a ui-sref="secure.tags.list" ui-sref-active="active"><span class="fa fa-tags"></span>Метки</a></li>
-            <li md-ink-ripple><a ui-sref="secure.costs.stats" ui-sref-active="active"><span class="fa fa-bar-chart"></span>Статистика</a></li>
-            <li md-ink-ripple><a ui-sref="secure.costs.import" ui-sref-active="active"><span class="fa fa-upload"></span>Импорт CSV</a></li>
+            <li md-ink-ripple>
+                <a ui-sref="public.home" ui-sref-active="active">
+                    <span class="fa fa-home"></span> 
+                </a>
+            </li>
+            <li md-ink-ripple>
+                <a ui-sref="secure.incomes.list" ui-sref-active="active">
+                    <span class="fa fa-arrow-circle-o-up"></span>
+                    <span class="text">Incomes</span>
+                </a>
+            </li>
+            <li md-ink-ripple>
+                <a ui-sref="secure.costs.list" ui-sref-active="active">
+                    <span class="fa fa-arrow-circle-o-down"></span>
+                    <span class="text">Expenses</span>
+                </a>
+            </li>
+            <li md-ink-ripple>
+                <a ui-sref="secure.tags.list" ui-sref-active="active">
+                    <span class="fa fa-tags"></span>
+                    <span class="text">Tags</span>
+                </a>
+            </li>
+            <li md-ink-ripple>
+                <a ui-sref="secure.costs.stats" ui-sref-active="active">
+                    <span class="fa fa-bar-chart"></span>
+                    <span class="text">Statistics</span>
+                </a>
+            </li>
+            <li md-ink-ripple>
+                <a ui-sref="secure.costs.import" ui-sref-active="active">
+                    <span class="fa fa-upload"></span>
+                    <span class="text">Import CSV</span>
+                </a>
+            </li>
 <!--            <li md-ink-ripple><a ui-sref="public.userlist" ui-sref-active="active"><span class="fa fa-users"/> </a></li>-->
-            <li md-ink-ripple><a href="#" auth-logout><span class="fa fa-lock"></span>Выход</a></li>
+            <li md-ink-ripple>
+                <a href="#" auth-logout>
+                    <span class="fa fa-lock"></span>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
             
          </ul>
          

@@ -13,7 +13,7 @@ class TransactionSerializer(serializers.ModelSerializer):
         fields = ('id', 'size', 'date', 'type', 'tag')
 
     def create(self, validated_data):
-        print 'create transaction'
+#        print 'create transaction'
         user = self.context['request'].user
         validated_data['owner'] = user
         return Transaction.objects.create(**validated_data)        
@@ -35,7 +35,7 @@ class TransactionViewSet(viewsets.ModelViewSet):
         file = request.FILES['file']
         format = request.DATA.get('format', None)
         user = request.user
-        print file, format
+#        print file, format
         if file:
             results = CSVParser.parse(format, file, user)
             if results['status'] < 1:

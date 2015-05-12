@@ -29,18 +29,30 @@ a:visited {
 .site-sidenav .navlinks li .fa {
     font-size: 1.8rem;
     width: 1.4em;
+    line-height: 2rem;
+    position: relative;
+    top: 0.2rem;
 }
 
 .site-sidenav .navlinks li .fa-money {
     font-size: 1.6rem;
+    
+}
+
+.site-sidenav .navlinks li .text {
+    line-height: 1rem;
 }
 .site-sidenav .navlinks a {
-    padding: 1em 2em;
+    padding: 0.7em 2em;
     display: block;
     text-decoration: none;
     color: inherit;
     border-bottom: 1px solid #D3D3D3;
 }
+
+.site-sidenav .navlinks a span {
+}
+
 
 .site-sidenav .navlinks a:hover {
     

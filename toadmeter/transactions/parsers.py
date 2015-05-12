@@ -28,8 +28,7 @@ class CSVParser():
             }        
         
         csv_data = file
-        print file, file.content_type
-        print dir(file)
+#        print file, file.content_type
 #        csv_data = csv_data.split('\n')[1:]
 #        csv_data = csv_data.split('\n')
         
@@ -70,6 +69,7 @@ class CSVParser():
             tag = tags[0]
         else:
             tag = Tag.objects.create(text=tagname, owner=user, type=type)
+#        print 'type is', type, ', tag is ', tag.text 
         matched_transactions = Transaction.objects.filter(size=size, type=type, tag=tag, date=date)
         if not matched_transactions:
             Transaction.objects.create(date=date, type=type, tag=tag, size=size, owner=user)
