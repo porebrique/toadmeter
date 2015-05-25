@@ -7,7 +7,7 @@
 //    mixObject is optional and has to be identical to definition object for restmod.model().mix(def_object)
 //   I mean, with $extend etc      
     
-    mdl.factory('RestmodTemplate', ['restmod', function (restmod) {
+    mdl.factory('RestmodTemplate', ['$filter', 'restmod', function ($filter, restmod) {
 
         var defaultOptions;
         
@@ -20,6 +20,23 @@
                         },
                         commonInstanceMethod: function () {
                             console.log('this is common instance method, called as $scope.something.instanceMethod()');
+                        }
+                    },
+                    List: { // If using restmod < 1.1.5 the use Collection instead.
+                        $orderBy: function (what) {
+                            var ordered = $filter('orderBy')(this, what);
+                            // reset the collection contents:
+                            this.length = 0;
+                            this.push.apply(this, ordered);
+                            return this;
+                        },
+                        $where: function (params) {
+//                            $filter('where')(response, {type: 'in'})
+                            var ordered = $filter('where')(this, params);
+                            // reset the collection contents:
+                            this.length = 0;
+                            this.push.apply(this, ordered);
+                            return this;
                         }
                     },
                     Model: {

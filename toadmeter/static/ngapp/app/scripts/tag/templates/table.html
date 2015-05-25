@@ -26,7 +26,9 @@
                            aria-label="delete {{tag.text}}"
                            ng-hide="tag.$isEdited"
                            ng-click="deleteTag(tag)">
-                    <span class="fa fa-remove"></span>
+                    <span spinner-when="tag.$isDeleting">
+                        <span class="fa fa-remove"></span>
+                    </span>
                 </md-button>                
             </td>
 

@@ -1,3 +1,10 @@
+
+button .fa-spin, a .fa-spin {
+   left: 0.45rem;
+    position: absolute;
+    top: 0.5rem;    
+    opacity: 0;
+}
 body p {
     margin-top: 0;
     line-height: 140%;
