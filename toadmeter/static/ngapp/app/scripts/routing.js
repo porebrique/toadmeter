@@ -36,7 +36,7 @@
                 url: '',
                 templateUrl: tmpl('global', 'home'),
                 data: {
-                    pageName: 'Жабометр'
+                    pageName: 'OH HAI'
                 }
             })
             .state('public.userlist', {

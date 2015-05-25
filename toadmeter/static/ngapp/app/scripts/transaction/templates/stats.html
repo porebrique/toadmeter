@@ -6,8 +6,8 @@
     </div>     
     
     <div ng-show="tags.length < 1 && tags.$pending.length < 0">
-        <span ng-show="type === 'out'">Здесь будет статистика расходов. Когда они появятся.</span>
-        <span ng-show="type === 'in'">Здесь будет статистика доходов. Когда они появятся.</span>
+        <span ng-show="type === 'out'">Here will be expences statistics. When you log some expences.</span>
+        <span ng-show="type === 'in'">Here will be incomes statistics. When you log some incomes.</span>
     </div>    
     
     <md-tabs  md-border-bottom ng-show="tags.length > 0">
@@ -19,7 +19,6 @@
         <md-tab label="<span class='fa fa-bar-chart'></span>">
             <md-content class="md-padding">
                 <highchart id="stats-column-chart" config="columnChartConfig"></highchart>
-                
             </md-content>
         </md-tab>
     </md-tabs>

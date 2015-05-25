@@ -23,14 +23,14 @@
                 url: 'list/',
                 template: '<transactions-list type="in"/>',
                 data: {
-                    pageName: 'Список доходов'
+                    pageName: 'Incomes'
                 }
             })
             .state('secure.incomes.edit', {
                 url: 'edit/:transaction_id',
                 template: '<transaction-edit type="in"/>',
                 data: {
-                    pageName: 'Новая запись'
+                    pageName: 'New record'
                 }
             })
             .state('secure.costs', {
@@ -44,28 +44,28 @@
                 url: 'list',
                 template: '<transactions-list type="out"/>',
                 data: {
-                    pageName: 'Список расходов'
+                    pageName: 'Expences'
                 }
             })
             .state('secure.costs.edit', {
                 url: 'edit/:transaction_id',
                 template: '<transaction-edit type="out"/>',
                 data: {
-                    pageName: 'Новая запись'
+                    pageName: 'New record'
                 }
             })
             .state('secure.costs.stats', {
                 url: 'stats',
                 template: '<transactions-stats type="out"/>',
                 data: {
-                    pageName: 'Статистика расходов'
+                    pageName: 'Statistics'
                 }
             })
             .state('secure.costs.import', {
                 url: 'import',
                 template: '<transactions-import />',
                 data: {
-                    pageName: 'Импорт csv'
+                    pageName: 'Import CSV'
                 }
             });
         

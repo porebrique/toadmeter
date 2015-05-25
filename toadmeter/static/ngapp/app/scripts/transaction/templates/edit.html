@@ -7,23 +7,22 @@
             <div layout="row" layout-sm="column">
                 <div class="sum-input">
                     <md-input-container>
-                        <label>Число</label>
-                        <input ng-model="transaction.size" type="text" placeholder="число" ng-pattern="/\d+/" required/>
+                        <label>Amount</label>
+                        <input name="ta_date" ng-model="transaction.size" type="text" placeholder="How much?" ng-pattern="/\d+/" required/>
                     </md-input-container>
                     
                     <tm-numpad></tm-numpad>
                      
-<!--                    date: {{transaction.date | date:'dd.MM.yy'}}-->
                 </div>  
                 <div class="date-input">
                     
                     <div layout="row" layout-align="center center">
                         <md-button type="button" aria-label="yesterday"
                                    ng-class="{'md-accent': datetype === 'yesterday'}"
-                                   ng-click="setDate('yesterday')">Вчера</md-button>
+                                   ng-click="setDate('yesterday')">Yesterday</md-button>
                         <md-button type="button" aria-label="today"
                                    ng-class="{'md-accent': datetype === 'today'}"
-                                   ng-click="setDate('today')" >Сегодня</md-button>
+                                   ng-click="setDate('today')" >Today</md-button>
                         <md-button type="button" aria-label="other date"
                                    ng-class="{'md-accent': datetype === 'select'}"
                                    ng-click="datepicker = !datepicker">
@@ -52,7 +51,7 @@
         </md-content>
         <md-content style="position: relative; padding-right: 50px; width: 30rem">
             <md-input-container flex>
-                <label>...или введите текст новой метки</label>
+                <label>...or type here a new tag</label>
                 <input ng-model="newTagText" type="text" placeholder="текст" on-enter="addTag()" />
             </md-input-container>        
             <div style="position: absolute; top: 28px; right: 0">
@@ -78,15 +77,15 @@
                ng-disabled="transaction_form.$invalid || datepicker"
                class="md-primary md-raised">
         <span ng-show="transaction_form.$invalid">
-            <md-tooltip style="margin-top: -30px;">Нужно указать сумму и метку</md-tooltip>
+            <md-tooltip style="margin-top: -30px;">You must enter amount and select one tag</md-tooltip>
         </span>
-        <span spinner-when="is.saving"><span class="fa fa-check"></span></span>
+        <span spinner-when="is.saving">save</span>
     </md-button>
     <md-button ng-click="remove()" 
                aria-label="delete"
                ng-if="::transaction.id"
                class="md-warn md-raised">
-        <span spinner-when="is.deleting"><span class="fa fa-trash"></span></span>
+        <span spinner-when="is.deleting">delete</span>
     </md-button>    
 </md-content>
 

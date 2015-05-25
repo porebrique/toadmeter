@@ -1,3 +1,7 @@
+body p {
+    margin-top: 0;
+    line-height: 140%;
+}
 .buttons button {
     margin-right: 1em;
 }

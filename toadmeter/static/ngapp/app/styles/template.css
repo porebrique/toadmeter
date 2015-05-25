@@ -64,6 +64,15 @@ a:visited {
     background: rgba(96, 125, 140, 0.1);
 }
 
+md-toolbar h1 {
+    margin-left: 1rem;
+}
+
+#main {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
 md-toolbar .current-user {
 
 }

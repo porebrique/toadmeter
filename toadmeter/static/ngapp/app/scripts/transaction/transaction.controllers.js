@@ -107,7 +107,7 @@
 //            console.log($scope.type);
             
             $scope.getSelectDateText = function () {
-                return $scope.datetype === 'select' ? $filter('date')($scope.transaction.date, 'dd.MM.yyyy') : 'Выбрать дату';
+                return $scope.datetype === 'select' ? $filter('date')($scope.transaction.date, 'dd.MM.yyyy') : 'Other date';
             };
             $scope.setDate = function (what) {
                 
