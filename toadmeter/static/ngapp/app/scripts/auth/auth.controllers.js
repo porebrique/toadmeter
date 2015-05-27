@@ -74,7 +74,7 @@
                         Auth.login($scope.user);
                     })
                     .catch(function (error) {
-                        console.log('error is', error);
+//                        console.log('error is', error);
                         if (error.status === 500) {
                             $scope.error = 'KABOOM! 500';
                         } else {
