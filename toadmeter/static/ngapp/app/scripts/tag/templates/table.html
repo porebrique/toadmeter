@@ -1,4 +1,8 @@
- <table class="tm-table tags-list">
+<div ng-show="tags.length < 1 && tags.$pending.length < 1">
+    There is nothing to show yet. <br/>
+    New tags can be added when you log your incomes and expences.
+</div> 
+<table class="tm-table tags-list" ng-show="tags.length > 0">
 
         <tr ng-repeat="tag in tags" ng-class="{'edit-mode': tag.$isEdited}">
             

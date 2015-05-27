@@ -275,6 +275,7 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('/static/ngapp/app/scripts/tag/templates/list.html',
     "<div>\n" +
+    "    \n" +
     "    <md-tabs>\n" +
     "        <md-tab label=\"<span class='fa fa-arrow-circle-o-down'></span>\">\n" +
     "            <md-content class=\"md-padding\">\n" +
@@ -294,7 +295,11 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('/static/ngapp/app/scripts/tag/templates/table.html',
-    " <table class=\"tm-table tags-list\">\n" +
+    "<div ng-show=\"tags.length < 1 && tags.$pending.length < 1\">\n" +
+    "    There is nothing to show yet. <br/>\n" +
+    "    New tags can be added when you log your incomes and expences.\n" +
+    "</div> \n" +
+    "<table class=\"tm-table tags-list\" ng-show=\"tags.length > 0\">\n" +
     "\n" +
     "        <tr ng-repeat=\"tag in tags\" ng-class=\"{'edit-mode': tag.$isEdited}\">\n" +
     "            \n" +
@@ -590,42 +595,45 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "<div class=\"stats-page\" ng-cloak layout=\"row\">\n" +
     "    <div layout=\"column\">\n" +
     "        \n" +
-    "    <div layout=\"column\">\n" +
-    "        <transaction-period-filter list=\"transactions\"></transaction-period-filter>\n" +
-    "    </div>     \n" +
-    "    \n" +
-    "    <div ng-show=\"tags.length < 1 && tags.$pending.length < 0\">\n" +
-    "        <span ng-show=\"type === 'out'\">Here will be expences statistics. When you log some expences.</span>\n" +
-    "        <span ng-show=\"type === 'in'\">Here will be incomes statistics. When you log some incomes.</span>\n" +
-    "    </div>    \n" +
-    "    \n" +
-    "    <md-tabs  md-border-bottom ng-show=\"tags.length > 0\">\n" +
-    "        <md-tab label=\"<span class='fa fa-pie-chart'></span>\">\n" +
-    "            <md-content class=\"md-padding\">\n" +
-    "                 <highchart id=\"stats-pie-chart\" config=\"pieChartConfig\"></highchart>\n" +
-    "            </md-content>\n" +
-    "        </md-tab>        \n" +
-    "        <md-tab label=\"<span class='fa fa-bar-chart'></span>\">\n" +
-    "            <md-content class=\"md-padding\">\n" +
-    "                <highchart id=\"stats-column-chart\" config=\"columnChartConfig\"></highchart>\n" +
-    "            </md-content>\n" +
-    "        </md-tab>\n" +
-    "    </md-tabs>\n" +
     "        \n" +
-    "    \n" +
-    "    <div class=\"tags\">\n" +
-    "        <span class=\"tag\"\n" +
-    "              ng-repeat=\"tag in tags | pick: 'sum > 0'\">\n" +
-    "            <md-checkbox ng-model=\"tag.enabled\" \n" +
-    "                         ng-change=\"toggleTag(tag)\" \n" +
-    "                         class=\"md-primary\" \n" +
-    "                         aria-label=\"Toggle {{::tag.text}}\">\n" +
-    "              {{::tag.text}} ({{::tag.sum}})\n" +
-    "            </md-checkbox>         \n" +
-    "<!--            <span class=\"passive\">{{::tag.text}} ({{::tag.sum}})</span>-->\n" +
-    "        </span>\n" +
+    "        <div>\n" +
+    "            <div layout=\"column\">\n" +
+    "                <transaction-period-filter list=\"transactions\"></transaction-period-filter>\n" +
+    "            </div>     \n" +
+    "            <div ng-show=\"transactions.length < 1 && transactions.$pending.length < 1\">\n" +
+    "                <span>There is nothing to show, at least in this month.</span>\n" +
+    "<!--                <span ng-show=\"type === 'out'\">Here will be expences statistics. When you log some expences.</span>-->\n" +
+    "<!--                <span ng-show=\"type === 'in'\">Here will be incomes statistics. When you log some incomes.</span>-->\n" +
+    "            </div>    \n" +
     "\n" +
-    "    </div>\n" +
+    "            <md-tabs  md-border-bottom ng-show=\"transactions.length > 0\">\n" +
+    "                <md-tab label=\"<span class='fa fa-pie-chart'></span>\">\n" +
+    "                    <md-content class=\"md-padding\">\n" +
+    "                         <highchart id=\"stats-pie-chart\" config=\"pieChartConfig\"></highchart>\n" +
+    "                    </md-content>\n" +
+    "                </md-tab>        \n" +
+    "                <md-tab label=\"<span class='fa fa-bar-chart'></span>\">\n" +
+    "                    <md-content class=\"md-padding\">\n" +
+    "                        <highchart id=\"stats-column-chart\" config=\"columnChartConfig\"></highchart>\n" +
+    "                    </md-content>\n" +
+    "                </md-tab>\n" +
+    "            </md-tabs>\n" +
+    "\n" +
+    "\n" +
+    "            <div class=\"tags\">\n" +
+    "                <span class=\"tag\"\n" +
+    "                      ng-repeat=\"tag in tags | pick: 'sum > 0'\">\n" +
+    "                    <md-checkbox ng-model=\"tag.enabled\" \n" +
+    "                                 ng-change=\"toggleTag(tag)\" \n" +
+    "                                 class=\"md-primary\" \n" +
+    "                                 aria-label=\"Toggle {{::tag.text}}\">\n" +
+    "                      {{::tag.text}} ({{::tag.sum}})\n" +
+    "                    </md-checkbox>         \n" +
+    "        <!--            <span class=\"passive\">{{::tag.text}} ({{::tag.sum}})</span>-->\n" +
+    "                </span>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "\n" +
     "    </div>\n" +
     "</div>"
