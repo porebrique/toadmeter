@@ -29,8 +29,6 @@ module.exports = function(config) {
       'bower_components/ui-router/release/angular-ui-router.js',
       'bower_components/angular-material/angular-material.js',
       'bower_components/md-date-time/dist/md-date-time.js',
-      'bower_components/lodash/lodash.js',
-      'bower_components/restangular/dist/restangular.js',
       'bower_components/angular-inflector/dist/angular-inflector.min.js',
       'bower_components/angular-restmod/dist/angular-restmod-bundle.min.js',
       'bower_components/ngstorage/ngStorage.js',

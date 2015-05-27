@@ -35,7 +35,7 @@
             })
             .state('secure.costs', {
                 abstract: true,
-                url: 'costs/',
+                url: 'expenses/',
                 template: '<ui-view/>',
                 data: {
                 }

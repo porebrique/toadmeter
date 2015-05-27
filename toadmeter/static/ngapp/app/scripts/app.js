@@ -16,19 +16,13 @@
         'ngCookies',
         'ngSanitize',
         'ngTouch',
-        
         'ngStorage',
-
         'angular.filter',
         'ngMaterial',
         'ui.router',
         'mdDateTime',
-        
         'highcharts-ng',
-
-        'restangular',
         'restmod',
-        
         'ngFileUpload',
         
         'LibsModule',
@@ -53,7 +47,7 @@
     });
     
                                  
-    app.config(['$provide', '$httpProvider', 'RestangularProvider', 'restmodProvider', 'API_URL',  function ($provide, $httpProvider, RestangularProvider, restmodProvider, API_URL) {
+    app.config(['$provide', '$httpProvider', 'restmodProvider', 'API_URL',  function ($provide, $httpProvider, restmodProvider, API_URL) {
         
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
@@ -88,45 +82,45 @@
 //        });
         
         // --- Restangular config
-        function addLocals(response) {
-            var newResponse = response;
-
-            if (ng.isArray(newResponse)) {
-                ng.forEach(newResponse, function (item) {
-                    item.local = {};
-                });
-            } else if (ng.isObject(newResponse)) {
-                newResponse.local = {};
-            }
-            return newResponse;
-        }
-
-        function removeLocals(elt, operation) {
-            if (operation === 'post' || operation === 'put') {
-                delete elt.local;
-            }
-            return elt;
-        }
-        
-        function getPaginatedList(data, operation) {
-            var result = data;
-            if (operation === 'getList') {
-                if (!ng.isArray(data)) {
-                    result = ng.copy(data.results);
-                    delete data.results;
-                    result.paginator = data;
-                }
-            }
-            return result;
-        }
-
-        RestangularProvider.setResponseExtractor(addLocals);
-        RestangularProvider.addResponseInterceptor(getPaginatedList);
-        RestangularProvider.addRequestInterceptor(removeLocals);
-        RestangularProvider.setRequestSuffix('/');
-        RestangularProvider.setBaseUrl(API_URL);
-        // --- /restangular
-        
+//        function addLocals(response) {
+//            var newResponse = response;
+//
+//            if (ng.isArray(newResponse)) {
+//                ng.forEach(newResponse, function (item) {
+//                    item.local = {};
+//                });
+//            } else if (ng.isObject(newResponse)) {
+//                newResponse.local = {};
+//            }
+//            return newResponse;
+//        }
+//
+//        function removeLocals(elt, operation) {
+//            if (operation === 'post' || operation === 'put') {
+//                delete elt.local;
+//            }
+//            return elt;
+//        }
+//        
+//        function getPaginatedList(data, operation) {
+//            var result = data;
+//            if (operation === 'getList') {
+//                if (!ng.isArray(data)) {
+//                    result = ng.copy(data.results);
+//                    delete data.results;
+//                    result.paginator = data;
+//                }
+//            }
+//            return result;
+//        }
+//
+//        RestangularProvider.setResponseExtractor(addLocals);
+//        RestangularProvider.addResponseInterceptor(getPaginatedList);
+//        RestangularProvider.addRequestInterceptor(removeLocals);
+//        RestangularProvider.setRequestSuffix('/');
+//        RestangularProvider.setBaseUrl(API_URL);
+//        // --- /restangular
+//        
     }]);
 
     

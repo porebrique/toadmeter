@@ -79,7 +79,7 @@
                     .then(function (response) {
                         storage.set('isLogged', true);
                         storage.set('user', response.data.user);
-                        var destination = desiredState ? desiredState.name : 'secure.incomes.list';
+                        var destination = desiredState ? desiredState.name : 'secure.costs.list';
                         desiredState = null;
                         // Not sure if timeout is useful
                         $state.go(destination);

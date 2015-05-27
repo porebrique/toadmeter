@@ -45,12 +45,18 @@
             })
             .state('public.reg', {
                 url: 'reg',
-                template: '<auth-registration />'
+                template: '<auth-registration />',
+                data: {
+                    pageName: 'Registration'
+                }
             })
             .state('public.login', {
                 url: 'login',
 //                templateUrl: tmpl('auth', 'login')
-                template: '<auth-login/>'
+                template: '<auth-login/>',
+                data: {
+                    pageName: 'Login'
+                }
             })
             .state('secure', {
                 parent: 'root',
