@@ -175,6 +175,8 @@ module.exports = function (grunt) {
       }
     },
 
+    
+      
     // Automatically inject Bower components into the app
     wiredep: {
       app: {
@@ -199,7 +201,35 @@ module.exports = function (grunt) {
       }
     },
       
+  
+    ngtemplates: {
+        Toadmeter: {
+            options: {
+               // usemin: 'dist/vendors.js', // <~~ This came from the <!-- build:js --> block
+//                        usemin: 'js/templates.js'
+                prefix: '/static/ngapp'
+//                        prefix: ''
+            },
+//                    cwd: 'app',
+//            src: ['app/templates/**.html', 'app/scripts/**/templates/**.html'],
+            src: ['app/scripts/**/templates/**.html'],
+            dest: '<%= yeoman.dist %>/scripts/templates.js'
+        }
+    },            
     replace: {
+                includetemplates: {
+//                    src: ['<%= yeoman.app %>/index.html'],
+//                    dest: ['<%= yeoman.app %>/index.html'],
+                    src: ['<%= yeoman.dist %>/index.html'],
+                    dest: ['<%= yeoman.dist %>/index.html'],
+                    replacements: [{
+//                        from: '</body>',
+                        from: '<!-- [ngtemplates] -->',
+                        to: '<script src="/static/ngapp/dist/scripts/templates.js"></script>'
+                        
+                    }]
+                    
+                },        
                 rewriteurlsinhtml: {
                     src: ['<%= yeoman.dist %>/index.html'], // source files array (supports minimatch)
                     dest: '<%= yeoman.dist %>/index.html', // destination directory or file
@@ -498,8 +528,10 @@ module.exports = function (grunt) {
 //    'cdnify',
     'cssmin',
     'copy:fa', //my
-      
+    'ngtemplates', //my
+    
     'replace:rewriteurlsinhtml', //my
+    'replace:includetemplates',  
     'uglify',
 //    'filerev',
     'usemin',
