@@ -41,18 +41,22 @@
         
         <md-divider></md-divider>
         
-        <md-content class="md-padding">
+        <md-content class="md-padding" ng-show="tags.length > 0">
             <input type="hidden" ng-model="transaction.tag" required />
+            <div style="opacity: 0.5;font-size: 0.8rem;">Select one tag from the list:</div>
+            <div  style="margin-left: -0.6rem;">
             <md-button class="" 
                        type="button"
                        ng-class="{'md-accent': transaction.tag === tag.id}"
                        ng-repeat="tag in tags" 
                        ng-click="transaction.tag = tag.id">{{::tag.text}}</md-button>
+            </div>
         </md-content>
         <md-content style="position: relative; padding-right: 50px; width: 30rem">
             <md-input-container flex>
-                <label>...or type here a new tag</label>
-                <input ng-model="newTagText" type="text" placeholder="текст" on-enter="addTag()" />
+                    <label ng-show="tags.length > 0">...or type here a new tag</label>
+                    <label ng-show="tags.length < 1">There is no tags yet, so type here a new one:</label>
+                    <input ng-model="newTagText" type="text" placeholder="tag's text" on-enter="addTag()" />
             </md-input-container>        
             <div style="position: absolute; top: 28px; right: 0">
                 <md-button aria-label="Добавить метку" 

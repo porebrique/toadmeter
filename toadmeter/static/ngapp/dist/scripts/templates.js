@@ -377,18 +377,22 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "        \n" +
     "        <md-divider></md-divider>\n" +
     "        \n" +
-    "        <md-content class=\"md-padding\">\n" +
+    "        <md-content class=\"md-padding\" ng-show=\"tags.length > 0\">\n" +
     "            <input type=\"hidden\" ng-model=\"transaction.tag\" required />\n" +
+    "            <div style=\"opacity: 0.5;font-size: 0.8rem;\">Select one tag from the list:</div>\n" +
+    "            <div  style=\"margin-left: -0.6rem;\">\n" +
     "            <md-button class=\"\" \n" +
     "                       type=\"button\"\n" +
     "                       ng-class=\"{'md-accent': transaction.tag === tag.id}\"\n" +
     "                       ng-repeat=\"tag in tags\" \n" +
     "                       ng-click=\"transaction.tag = tag.id\">{{::tag.text}}</md-button>\n" +
+    "            </div>\n" +
     "        </md-content>\n" +
     "        <md-content style=\"position: relative; padding-right: 50px; width: 30rem\">\n" +
     "            <md-input-container flex>\n" +
-    "                <label>...or type here a new tag</label>\n" +
-    "                <input ng-model=\"newTagText\" type=\"text\" placeholder=\"текст\" on-enter=\"addTag()\" />\n" +
+    "                    <label ng-show=\"tags.length > 0\">...or type here a new tag</label>\n" +
+    "                    <label ng-show=\"tags.length < 1\">There is no tags yet, so type here a new one:</label>\n" +
+    "                    <input ng-model=\"newTagText\" type=\"text\" placeholder=\"tag's text\" on-enter=\"addTag()\" />\n" +
     "            </md-input-container>        \n" +
     "            <div style=\"position: absolute; top: 28px; right: 0\">\n" +
     "                <md-button aria-label=\"Добавить метку\" \n" +
@@ -484,15 +488,19 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "<div class=\"transactions-list\" layout=\"row\">\n" +
     "<div flex-sm=\"100\" flex-md=\"100\" flex-lg=\"80\" flex-gt-lg=\"50\">\n" +
     "    \n" +
-    "<div layout=\"row\" layout-align=\"center center\" layout-fill style=\"padding: 0 0.4rem;\">\n" +
+    "<div layout=\"column\" layout-gt-md=\"row\" layout-align=\"center center\" layout-fill style=\"padding: 0 0.4rem;\">\n" +
     "        <div flex style=\"text-align: center;\">\n" +
     "            <md-button class=\"md-fab md-raised md-primary\" aria-label=\"new transaction\" ui-sref=\"{{::addButtonUrl}}\">\n" +
     "                <span class=\"fa fa-plus\" />\n" +
     "            </md-button>                \n" +
     "        </div>    \n" +
-    "    <div flex>\n" +
-    "    <transaction-period-filter list=\"transactions\"></transaction-period-filter>\n" +
+    "    <div flex ng-show=\"transactions.length > 0\">\n" +
+    "        <transaction-period-filter list=\"transactions\"></transaction-period-filter>\n" +
     "    </div>\n" +
+    "</div>    \n" +
+    "    \n" +
+    "<div layout=\"row\" layout-align=\"center center\" ng-show=\"transactions.length < 1\" style=\"margin-top: 2rem;\">\n" +
+    "    List is empty. You can log something with the button above.\n" +
     "</div>    \n" +
     "    \n" +
     "<div layout=\"column\">\n" +
