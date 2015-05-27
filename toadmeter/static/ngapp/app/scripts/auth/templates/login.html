@@ -7,11 +7,11 @@
             <div layout="row" layout-sm="column">
                 <md-input-container>
                     <label>Username</label>
-                    <input ng-model="user.username" type="text" placeholder="Username" />
+                    <input ng-model="user.username" type="text" placeholder="Username" required />
                 </md-input-container>
                 <md-input-container>
                     <label>password</label>
-                    <input ng-model="user.password" type="password" placeholder="Password" />
+                    <input ng-model="user.password" type="password" placeholder="Password" required />
                 </md-input-container>
             </div>            
 
@@ -26,10 +26,15 @@
     
 </div>
 
+<div layout="row" ng-show="error" style="margin: -1rem 0 1rem 0;">
+    <div class="error">{{error}}</div>
+</div>
 
 <md-content layout="row">
     <md-divider></md-divider>
-    <md-button ng-click="save()" class="md-primary md-raised">
+    <md-button ng-click="save()" 
+               ng-disabled="loginform.$invalid"
+               class="md-primary md-raised">
         <span spinner-when="is.saving">Log in</span>
     </md-button>
 </md-content>

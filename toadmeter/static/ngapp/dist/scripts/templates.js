@@ -11,11 +11,11 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "            <div layout=\"row\" layout-sm=\"column\">\n" +
     "                <md-input-container>\n" +
     "                    <label>Username</label>\n" +
-    "                    <input ng-model=\"user.username\" type=\"text\" placeholder=\"Username\" />\n" +
+    "                    <input ng-model=\"user.username\" type=\"text\" placeholder=\"Username\" required />\n" +
     "                </md-input-container>\n" +
     "                <md-input-container>\n" +
     "                    <label>password</label>\n" +
-    "                    <input ng-model=\"user.password\" type=\"password\" placeholder=\"Password\" />\n" +
+    "                    <input ng-model=\"user.password\" type=\"password\" placeholder=\"Password\" required />\n" +
     "                </md-input-container>\n" +
     "            </div>            \n" +
     "\n" +
@@ -30,10 +30,15 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "    \n" +
     "</div>\n" +
     "\n" +
+    "<div layout=\"row\" ng-show=\"error\" style=\"margin: -1rem 0 1rem 0;\">\n" +
+    "    <div class=\"error\">{{error}}</div>\n" +
+    "</div>\n" +
     "\n" +
     "<md-content layout=\"row\">\n" +
     "    <md-divider></md-divider>\n" +
-    "    <md-button ng-click=\"save()\" class=\"md-primary md-raised\">\n" +
+    "    <md-button ng-click=\"save()\" \n" +
+    "               ng-disabled=\"loginform.$invalid\"\n" +
+    "               class=\"md-primary md-raised\">\n" +
     "        <span spinner-when=\"is.saving\">Log in</span>\n" +
     "    </md-button>\n" +
     "</md-content>\n" +

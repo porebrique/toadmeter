@@ -44,10 +44,16 @@
 //                        console.log(response);
                         $scope.is.saving = false;
                         if (response.status === 403) {
-                            $scope.error = 'Неверная пара логин+пароль';
+//                            $scope.error = 'Неверная пара логин+пароль';
+                            $scope.error = response.data;
                         }
                         if (response.status === 400) {
-                            $scope.error = 'Логин либо пароль не получен';
+//                            $scope.error = 'Логин либо пароль не получен';
+                            $scope.error = response.data;
+                        }
+                        if (response.status === 500) {
+//                            $scope.error = 'Логин либо пароль не получен';
+                            $scope.error = 'Server error, sorry';
                         }
                     });
             };
