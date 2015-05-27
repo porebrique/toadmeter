@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 BASE_DIR = os.path.normpath(os.path.dirname(__file__))
-
+WWW_DIR = os.path.join(PROJECT_ROOT, 'www')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -66,7 +66,7 @@ WSGI_APPLICATION = 'toadmeter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_ROOT, 'www', 'db.sqlite3'),
+        'NAME': os.path.join(WWW_DIR, 'db.sqlite3'),
     }
 }
 
@@ -95,7 +95,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(WWW_DIR, 'static')
 
+print STATIC_ROOT
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }
