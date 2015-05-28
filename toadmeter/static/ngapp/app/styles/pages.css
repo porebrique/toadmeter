@@ -1,3 +1,7 @@
+.regform md-input-container {
+    overflow: hidden;
+}
+
 .transaction-period-filter,
 .stats-page .transaction-period-filter {
     border: 1px solid silver;

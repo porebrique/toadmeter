@@ -46,18 +46,3 @@ class TransactionViewSet(viewsets.ModelViewSet):
             return response.Response('No csv provided', status=status.HTTP_400_BAD_REQUEST)
         return response.Response('ok')
     
-    @decorators.list_route(methods=['post'])
-    def upload_OLD(self, request):
-        csv_data = request.DATA.get('csv', None).encode('utf-8')
-        format = request.DATA.get('format', None)
-        user = request.user
-        
-        if csv_data:
-            results = CSVParser.parse(format, csv_data, user)
-            if results['status'] < 1:
-                return response.Response(results['message'])
-            else:
-                return response.Response(results['message'], status=status.HTTP_400_BAD_REQUEST) 
-        else:
-            return response.Response('No csv provided', status=status.HTTP_400_BAD_REQUEST)
-         

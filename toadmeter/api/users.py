@@ -1,5 +1,5 @@
 import django_filters
-from rest_framework import serializers, viewsets, filters, decorators, response
+from rest_framework import serializers, viewsets, filters, decorators, response, permissions
 from django.contrib.auth.models import User
 from time import sleep
 
@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'email', 'is_staff', 'first_name', 'last_name')
         
-    
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -19,6 +19,13 @@ class UserViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
 #    filter_fields = ('is_staff', 'id', 'type')
     filter_fields = ('username',)
+#    permission_classes = (permissions.IsAuthenticated,)
+    
+    def get_queryset(self):
+#        print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', self.request.user.is_superuser
+        if not self.request.user.is_superuser:
+            self.queryset = self.queryset.filter(id=self.request.user.id)
+        return self.queryset            
     
     @decorators.list_route(methods=['get'])
     def check(self, request, filename=None, format=None, pk=None):
