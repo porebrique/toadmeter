@@ -1,68 +1,42 @@
-<form  name="regform"  ng-submit="submit()">
+<form  name="regform" class="regform" ng-submit="submit()">
 
 <div layout="row">
-    <div flex-gt-md="50" flex-gt-sm="75" flex-sm>
-
-        <md-content class="md-padding">
-            
-            <div layout="row" layout-sm="column">
-                <md-input-container>
-                    <label>Username</label>
-                    <input ng-model="user.username" type="text" placeholder="Username" required/>
-                </md-input-container>
-                <md-input-container>
-                    <label>Password</label>
-                    <input ng-model="user.password" type="password" placeholder="Username" required/>
-                </md-input-container>
-<!--
-                <md-input-container>
-                    <label>Repeat password</label>
-                    <input ng-model="user.password2" type="password" placeholder="Password" required />
-                </md-input-container>
--->
-            </div>  
-            
-            <div layout="column" ng-show="error">
+    <div  flex-sm="100" flex-gt-sm="70" flex-gt-md="40" flex-lg="30">
+    
+        <div layout="column">
+            <md-input-container>
+                <label>Username</label>
+                <input ng-model="user.username" type="text" placeholder="Username" required/>
+                <interactive-hint watch="user.username" execute="checkUsername"></interactive-hint>
+<!--                <span class="interactive-hint">Username is already taken</span>-->
+            </md-input-container>
+            <md-input-container>
+                <label>Password</label>
+                <input ng-model="user.password" type="password" placeholder="Username" required/>
+            </md-input-container>
+        </div>
+            <div>
                 <div class="error">
                     {{error}}
                 </div>
             </div>
-<!--
-            <div layout="row" layout-sm="column">
-                <md-input-container>
-                    <label>First name</label>
-                    <input ng-model="user.first_name" type="text" placeholder="First name" />
-                </md-input-container>
-                <md-input-container>
-                    <label>Last name</label>
-                    <input ng-model="user.last_name" type="text" placeholder="Last name" />
-                </md-input-container>
-            </div>             
-            
-          
 
-            <div layout="row">
-                <md-checkbox style="margin-lefT: 0;" ng-model="user.rememberme" class="md-primary" aria-label="User is staff">Remember me</md-checkbox>
+<!--    <md-divider></md-divider>-->
+
+            <div>
+                <md-button ng-click="save()" 
+                           ng-disabled="regform.$invalid"
+                           class="md-primary md-raised">
+                    <span spinner-when="is.saving">Register</span>
+                </md-button>
             </div>
--->
-        </md-content>
-        
-
     </div>
-    
 
+    
     
 </div>
 
 
-<md-content layout="row" class="md-padding">
-    <md-divider></md-divider>
-    <md-button ng-click="save()" 
-               ng-disabled="regform.$invalid"
-               class="md-primary md-raised">
-        <span spinner-when="is.saving">Register</span>
-    </md-button>
-</md-content>
 
 
 

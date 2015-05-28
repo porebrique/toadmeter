@@ -1,3 +1,34 @@
+md-input-container .interactive-hint {
+ bottom: -1.6rem;
+    font-size: 0.7rem;
+    left: 0.3rem;
+    min-height: 3rem;
+    min-width: 4rem;
+    overflow: hidden;
+    position: absolute;
+}
+
+md-input-container .interactive-hint.ok {
+    color: green;
+}
+md-input-container .interactive-hint.error {
+    color: red;
+}
+
+md-input-container .interactive-hint .fa {
+    position: absolute;
+    lefT: 0;
+    top: 0;
+    font-size: 1.2rem;
+    display: none;
+}
+
+md-input-container .interactive-hint.is-loading .text {
+    display: none;
+}
+md-input-container .interactive-hint.is-loading .fa {
+    display: inline-block;
+}
 
 button .fa-spin, a .fa-spin {
    left: 0.45rem;

@@ -66,6 +66,12 @@
             
 //            $scope.user = User.$build();
             
+            $scope.checkUsername = function (what) {
+//                console.log('Checking username', what, '...');
+                return User.checkUsername(what);
+//                console.log('Got result:', result);
+            };
+            
             $scope.submit = function () {
                 $scope.error = null;
                 Auth.reg($scope.user)
