@@ -77,71 +77,44 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('/static/ngapp/app/scripts/auth/templates/reg.html',
-    "<form  name=\"regform\"  ng-submit=\"submit()\">\n" +
+    "<form  name=\"regform\" class=\"regform\" ng-submit=\"submit()\">\n" +
     "\n" +
     "<div layout=\"row\">\n" +
-    "    <div flex-gt-md=\"50\" flex-gt-sm=\"75\" flex-sm>\n" +
-    "\n" +
-    "        <md-content class=\"md-padding\">\n" +
-    "            \n" +
-    "            <div layout=\"row\" layout-sm=\"column\">\n" +
-    "                <md-input-container>\n" +
-    "                    <label>Username</label>\n" +
-    "                    <input ng-model=\"user.username\" type=\"text\" placeholder=\"Username\" required/>\n" +
-    "                </md-input-container>\n" +
-    "                <md-input-container>\n" +
-    "                    <label>Password</label>\n" +
-    "                    <input ng-model=\"user.password\" type=\"password\" placeholder=\"Username\" required/>\n" +
-    "                </md-input-container>\n" +
-    "<!--\n" +
-    "                <md-input-container>\n" +
-    "                    <label>Repeat password</label>\n" +
-    "                    <input ng-model=\"user.password2\" type=\"password\" placeholder=\"Password\" required />\n" +
-    "                </md-input-container>\n" +
-    "-->\n" +
-    "            </div>  \n" +
-    "            \n" +
-    "            <div layout=\"column\" ng-show=\"error\">\n" +
+    "    <div  flex-sm=\"100\" flex-gt-sm=\"70\" flex-gt-md=\"40\" flex-lg=\"30\">\n" +
+    "        <div layout=\"column\">\n" +
+    "            <md-input-container>\n" +
+    "                <label>Username</label>\n" +
+    "                <input ng-model=\"user.username\" type=\"text\" placeholder=\"Username\" required/>\n" +
+    "                <interactive-hint watch=\"user.username\" execute=\"checkUsername\"></interactive-hint>\n" +
+    "<!--                <span class=\"interactive-hint\">Username is already taken</span>-->\n" +
+    "            </md-input-container>\n" +
+    "            <md-input-container>\n" +
+    "                <label>Password</label>\n" +
+    "                <input ng-model=\"user.password\" type=\"password\" placeholder=\"Username\" required/>\n" +
+    "            </md-input-container>\n" +
+    "        </div>\n" +
+    "            <div>\n" +
     "                <div class=\"error\">\n" +
     "                    {{error}}\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "<!--\n" +
-    "            <div layout=\"row\" layout-sm=\"column\">\n" +
-    "                <md-input-container>\n" +
-    "                    <label>First name</label>\n" +
-    "                    <input ng-model=\"user.first_name\" type=\"text\" placeholder=\"First name\" />\n" +
-    "                </md-input-container>\n" +
-    "                <md-input-container>\n" +
-    "                    <label>Last name</label>\n" +
-    "                    <input ng-model=\"user.last_name\" type=\"text\" placeholder=\"Last name\" />\n" +
-    "                </md-input-container>\n" +
-    "            </div>             \n" +
-    "            \n" +
-    "          \n" +
     "\n" +
-    "            <div layout=\"row\">\n" +
-    "                <md-checkbox style=\"margin-lefT: 0;\" ng-model=\"user.rememberme\" class=\"md-primary\" aria-label=\"User is staff\">Remember me</md-checkbox>\n" +
+    "<!--    <md-divider></md-divider>-->\n" +
+    "\n" +
+    "            <div>\n" +
+    "                <md-button ng-click=\"save()\" \n" +
+    "                           ng-disabled=\"regform.$invalid\"\n" +
+    "                           class=\"md-primary md-raised\">\n" +
+    "                    <span spinner-when=\"is.saving\">Register</span>\n" +
+    "                </md-button>\n" +
     "            </div>\n" +
-    "-->\n" +
-    "        </md-content>\n" +
-    "        \n" +
-    "\n" +
     "    </div>\n" +
-    "    \n" +
     "\n" +
+    "    \n" +
     "    \n" +
     "</div>\n" +
     "\n" +
     "\n" +
-    "<md-content layout=\"row\" class=\"md-padding\">\n" +
-    "    <md-divider></md-divider>\n" +
-    "    <md-button ng-click=\"save()\" \n" +
-    "               ng-disabled=\"regform.$invalid\"\n" +
-    "               class=\"md-primary md-raised\">\n" +
-    "        <span spinner-when=\"is.saving\">Register</span>\n" +
-    "    </md-button>\n" +
-    "</md-content>\n" +
     "\n" +
     "\n" +
     "\n" +
