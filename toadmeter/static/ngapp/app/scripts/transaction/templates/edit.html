@@ -8,7 +8,7 @@
                 <div class="sum-input">
                     <md-input-container>
                         <label>Amount</label>
-                        <input name="ta_date" ng-model="transaction.size" type="text" placeholder="How much?" ng-pattern="/\d+/" required/>
+                        <input name="ta_date" ng-model="transaction.size" type="text" ng-pattern="/\d+/" required/>
                     </md-input-container>
                     
                     <tm-numpad></tm-numpad>
@@ -52,14 +52,15 @@
                        ng-click="transaction.tag = tag.id">{{::tag.text}}</md-button>
             </div>
         </md-content>
-        <md-content style="position: relative; padding-right: 50px; width: 30rem">
+        <md-content class="new-tag-form">
             <md-input-container flex>
                     <label ng-show="tags.length > 0">...or type here a new tag</label>
                     <label ng-show="tags.length < 1">There is no tags yet, so type here a new one:</label>
-                    <input ng-model="newTagText" type="text" placeholder="tag's text" on-enter="addTag()" />
+                    <input ng-model="newTagText" type="text" on-enter="addTag()" />
             </md-input-container>        
-            <div style="position: absolute; top: 28px; right: 0">
-                <md-button aria-label="Добавить метку" 
+            <div class="inline-ok">
+                <md-button style="min-width: auto"
+                           aria-label="Добавить метку" 
                            ng-disabled="!newTagText || newTagText.length < 1"
                            ng-click="addTag()">
                     <span class="fa fa-check"></span>

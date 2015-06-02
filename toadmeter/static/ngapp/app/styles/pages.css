@@ -24,6 +24,29 @@
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
 }
+
+
+
+.transaction-edit .new-tag-form {
+     position: relative; 
+    padding-right: 50px; 
+    width: 30rem;
+}
+
+
+.transaction-edit .new-tag-form .inline-ok {
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+
+
+.transaction-edit .new-tag-form .inline-ok button {
+    min-width: auto;
+}
+
+
 .tags-list {
 
 }
