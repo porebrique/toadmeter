@@ -3,6 +3,7 @@
 from rest_framework import serializers, viewsets, filters, exceptions, permissions, response, status, decorators
 from time import sleep
 from toadmeter.transactions.models import Tag
+from toadmeter.api.permissions import DemoUserPermission
 #from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
 
 class TagSerializer(serializers.ModelSerializer):
@@ -20,7 +21,7 @@ class TagViewSet(viewsets.ModelViewSet):
     serializer_class = TagSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('type',)
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, DemoUserPermission)
     
     def get_queryset(self):
         self.queryset = self.queryset.filter(owner=self.request.user)

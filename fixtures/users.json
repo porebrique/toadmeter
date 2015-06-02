@@ -21,18 +21,18 @@
     "pk": 2, 
     "model": "auth.user", 
     "fields": {
-        "username": "other", 
+        "username": "demo", 
         "first_name": "", 
         "last_name": "", 
         "is_active": true, 
-        "is_superuser": true, 
-        "is_staff": true, 
-        "last_login": "2015-04-07T12:26:04.645Z", 
-        "groups": [], 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-06-02T12:09:05.707Z", 
+        "groups": [1], 
         "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$5LSLqQAgmi60$aTSQUqsoONi4kpKiKdaxkPYvVAmkGzJ5X+/bryrBJX8=", 
-        "email": "admin2@admin.ad", 
-        "date_joined": "2015-04-07T12:26:04.645Z"
+        "password": "pbkdf2_sha256$12000$T4SiwmgKJuBI$r+Rthe2zW+HJxUA1OIuUpXrE6zBuzV14Kl7rYzGBRoc=", 
+        "email": "", 
+        "date_joined": "2015-06-02T12:09:05.396Z"
     }
 }    
 ]

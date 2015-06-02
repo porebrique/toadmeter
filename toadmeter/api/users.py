@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
 #        model = CustomUser
         model = User
-        fields = ('id', 'username', 'email', 'is_staff', 'first_name', 'last_name')
+        fields = ('id', 'username','is_staff', 'first_name', 'last_name')
         
 
 
@@ -22,7 +22,6 @@ class UserViewSet(viewsets.ModelViewSet):
 #    permission_classes = (permissions.IsAuthenticated,)
     
     def get_queryset(self):
-#        print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', self.request.user.is_superuser
         if not self.request.user.is_superuser:
             self.queryset = self.queryset.filter(id=self.request.user.id)
         return self.queryset            

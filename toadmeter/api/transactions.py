@@ -3,6 +3,7 @@
 from rest_framework import serializers, viewsets, filters, exceptions, permissions, response, status, decorators, parsers
 from toadmeter.transactions.models import Transaction
 from toadmeter.transactions.parsers import CSVParser
+from toadmeter.api.permissions import DemoUserPermission
 #from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
 
 from toadmeter.api import utils as api_utils
@@ -23,7 +24,7 @@ class TransactionViewSet(viewsets.ModelViewSet):
     serializer_class = TransactionSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('type',) 
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, DemoUserPermission)
     parser_classes = (parsers.JSONParser, parsers.MultiPartParser)
     
     def get_queryset(self):
