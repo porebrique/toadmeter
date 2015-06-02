@@ -1,19 +1,19 @@
 <div class="transactions-list" layout="row">
 <div flex-sm="100" flex-md="100" flex-lg="80" flex-gt-lg="50">
     
-<div layout="column" layout-gt-md="row" layout-align="center center" layout-fill style="padding: 0 0.4rem;">
-        <div flex style="text-align: center;">
-            <md-button class="md-fab md-raised md-primary" aria-label="new transaction" ui-sref="{{::addButtonUrl}}">
-                <span class="fa fa-plus" />
-            </md-button>                
-        </div>    
-    <div flex ng-show="transactions.length > 0">
+<div layout="column" layout-gt-md="row" layout-align-md="center center" layout-fill style="padding: 0 0.4rem;">
+    <div flex style="text-align: center; max-width: 4rem;">
+        <md-button class="md-fab md-raised md-primary" aria-label="new transaction" ui-sref="{{::addButtonUrl}}">
+            <span class="fa fa-plus" />
+        </md-button>                
+    </div>    
+    <div flex>
         <transaction-period-filter list="transactions"></transaction-period-filter>
     </div>
 </div>    
     
-<div layout="row" layout-align="center center" ng-show="transactions.length < 1" style="margin-top: 2rem;">
-    List is empty. You can log something with the button above.
+<div layout="row" layout-align-md="center center" ng-show="transactions.length < 1" style="margin-top: 2rem;">
+    List is empty. You can log something or select another month.
 </div>    
     
 <div layout="column">
