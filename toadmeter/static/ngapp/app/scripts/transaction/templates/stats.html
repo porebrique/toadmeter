@@ -12,7 +12,7 @@
 <!--                <span ng-show="type === 'in'">Here will be incomes statistics. When you log some incomes.</span>-->
             </div>    
 
-            <md-tabs  md-border-bottom ng-show="transactions.length > 0">
+            <md-tabs md-dynamic-height md-border-bottom ng-show="transactions.length > 0">
                 <md-tab label="<span class='fa fa-pie-chart'></span>">
                     <md-content class="md-padding">
                          <highchart id="stats-pie-chart" config="pieChartConfig"></highchart>

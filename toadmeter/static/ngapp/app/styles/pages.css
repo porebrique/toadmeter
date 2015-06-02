@@ -15,6 +15,15 @@
 /*    float: right;*/
     margin-lefT: 1rem;
 }
+
+.transaction-period-filter button {
+    margin: 0;
+}
+
+.transaction-period-filter md-select {
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
 .tags-list {
 
 }
