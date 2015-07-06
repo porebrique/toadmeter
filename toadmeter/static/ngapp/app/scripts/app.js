@@ -81,46 +81,6 @@
 //            }
 //        });
         
-        // --- Restangular config
-//        function addLocals(response) {
-//            var newResponse = response;
-//
-//            if (ng.isArray(newResponse)) {
-//                ng.forEach(newResponse, function (item) {
-//                    item.local = {};
-//                });
-//            } else if (ng.isObject(newResponse)) {
-//                newResponse.local = {};
-//            }
-//            return newResponse;
-//        }
-//
-//        function removeLocals(elt, operation) {
-//            if (operation === 'post' || operation === 'put') {
-//                delete elt.local;
-//            }
-//            return elt;
-//        }
-//        
-//        function getPaginatedList(data, operation) {
-//            var result = data;
-//            if (operation === 'getList') {
-//                if (!ng.isArray(data)) {
-//                    result = ng.copy(data.results);
-//                    delete data.results;
-//                    result.paginator = data;
-//                }
-//            }
-//            return result;
-//        }
-//
-//        RestangularProvider.setResponseExtractor(addLocals);
-//        RestangularProvider.addResponseInterceptor(getPaginatedList);
-//        RestangularProvider.addRequestInterceptor(removeLocals);
-//        RestangularProvider.setRequestSuffix('/');
-//        RestangularProvider.setBaseUrl(API_URL);
-//        // --- /restangular
-//        
     }]);
 
     
@@ -139,10 +99,15 @@
             $hooks: {
                 'after-request-error': function (response) {
                     if (response.status === 403) {
-                        Auth.clearUser();
-                        $state.go('public.login');
+//                        console.log('got 403');
+                        if (Auth.getUser().username === 'demo') {
+                            
+                            Auth.demoUserRestrictionAlert();
+                        } else {
+                            Auth.clearUser();
+                            $state.go('public.login');
+                        }
                     }
-//                    delete this.locals;
                 },
                 'before-request': function (req) {
                     req.url += '/';

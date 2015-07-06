@@ -4,8 +4,8 @@
     
     var mdl = ng.module('AuthModule');
 
-    mdl.factory('Auth', ['$http', '$rootScope', '$cookieStore', '$state', '$timeout', '$localStorage',
-        function ($http, $rootScope, $cookieStore, $state, $timeout, $localStorage) {
+    mdl.factory('Auth', ['$http', '$rootScope', '$cookieStore', '$state', '$timeout', '$localStorage', '$mdToast', '$animate',
+        function ($http, $rootScope, $cookieStore, $state, $timeout, $localStorage, $mdToast, $animate) {
 //            console.log('auth service');
             var storage,
                 desiredState = null;
@@ -130,6 +130,16 @@
                 }
             
             }
+            function demoUserRestrictionAlert() {
+//                console.log('this is demo user, no redirecting');
+                var preset = $mdToast.simple()
+                                .position('top right')
+                                .hideDelay(30000)
+                                .action('x')
+                                .content("You are using demo account. As a demo user you can only examine interfaces and previously entered data, but cannot make any changes. To do so, simply logout and log in as yourself.");
+//                console.log(preset);
+                $mdToast.show(preset);
+            }
             
             /* --------------- */
             
@@ -142,7 +152,9 @@
                 getUser: getUser,
                 clearUser: clearUser,
                 //isLogged: isLogged,
-                checkAuthentication: checkAuthentication
+                checkAuthentication: checkAuthentication,
+                demoUserRestrictionAlert: demoUserRestrictionAlert
+
             };
             
         }]);

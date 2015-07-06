@@ -6,13 +6,10 @@ class DemoUserPermission(permissions.BasePermission):
     """
 
     def has_permission(self, request, view):
+#        return True # for filling demo data
         perm = True
-#        print 'unsafe', not request.method in permissions.SAFE_METHODS
         if not request.method in permissions.SAFE_METHODS:
             isDemo = request.user.groups.filter(pk=1)
-#            print 'isDemo:', isDemo
             if isDemo:
-#                print 'this is demo user!'
                 perm = False
-#        print 'User is', request.user, ', permitted: ', perm
         return perm
