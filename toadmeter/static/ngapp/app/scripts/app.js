@@ -11,7 +11,7 @@
 (function (ng) {
     'use strict';
     var app = ng.module('Toadmeter', [
-        'ngAnimate',
+//        'ngAnimate',
         'ngAria',
         'ngCookies',
         'ngSanitize',

@@ -1,17 +1,22 @@
 <div>
-    
-    <md-tabs md-dynamic-height>
-        <md-tab label="<span class='fa fa-arrow-circle-o-down'></span>">
-            <md-content class="md-padding">
-                <tags-list-filtered tags="expenses"/>
-            </md-content>
-        </md-tab>      
-            
-        <md-tab label="<span class='fa fa-arrow-circle-o-up'></span>">
-            <md-content class="md-padding">
-                <tags-list-filtered tags="incomes"/>
-            </md-content>
-        </md-tab>      
+    <md-tabs md-dynamic-height md-center-tabs="false">
+        <md-tab>
+            <md-tab-label>
+                <span class="fa fa-arrow-circle-o-down"></span>
+            </md-tab-label>
+            <md-tab-body class="md-padding">
+                <tags-list-filtered tags="expenses" />
+            </md-tab-body>
+        </md-tab>
+
+        <md-tab>
+            <md-tab-label>
+                <span class="fa fa-arrow-circle-o-up"></span>
+            </md-tab-label>
+            <md-tab-body class="md-padding">
+                <tags-list-filtered tags="incomes" />
+            </md-tab-body>
+        </md-tab>
     </md-tabs>
-            
+
 </div>

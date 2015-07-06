@@ -50,6 +50,7 @@ body p {
 .md-fab .fa {
     font-size: 2rem;
     line-height: 3.5rem;
+    display: block;
 }
 
 

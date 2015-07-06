@@ -2,16 +2,16 @@
   "name": "Toadmeter",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "^1.3.0",
-    "angular-animate": "^1.3.0",
-    "angular-aria": "^1.3.0",
-    "angular-cookies": "^1.3.0",
-    "angular-sanitize": "^1.3.0",
-    "angular-touch": "^1.3.0",
-    "ui-router": "~0.2.13",
-    "angular-material": "~0.8.3",
-    "md-date-time": "~0.0.14",
-    "angular-restmod": "~1.1.8",
+    "angular": "latest",
+    "angular-animate": "latest",
+    "angular-aria": "latest",
+    "angular-cookies": "latest",
+    "angular-sanitize": "latest",
+    "angular-touch": "latest",
+    "ui-router": "latest",
+    "angular-material": "latest",
+    "md-date-time": "latest",
+    "angular-restmod": "latest",
     "ngstorage": "~0.3.0",
     "font-awesome": "~4.3.0",
     "angular-filter": "~0.5.4",
@@ -25,5 +25,8 @@
     "jquery": "~2.1.4"
   },
   "appPath": "app",
-  "moduleName": "ngappApp"
+  "moduleName": "ngappApp",
+  "resolutions": {
+    "angular-material": "~0.10.0"
+  }
 }

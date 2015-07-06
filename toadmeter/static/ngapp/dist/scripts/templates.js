@@ -11,11 +11,11 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "            <div layout=\"row\" layout-sm=\"column\">\n" +
     "                <md-input-container>\n" +
     "                    <label>Username</label>\n" +
-    "                    <input ng-model=\"user.username\" type=\"text\" placeholder=\"Username\" required />\n" +
+    "                    <input ng-model=\"user.username\" type=\"text\"  required />\n" +
     "                </md-input-container>\n" +
     "                <md-input-container>\n" +
-    "                    <label>password</label>\n" +
-    "                    <input ng-model=\"user.password\" type=\"password\" placeholder=\"Password\" required />\n" +
+    "                    <label>Password</label>\n" +
+    "                    <input ng-model=\"user.password\" type=\"password\" required />\n" +
     "                </md-input-container>\n" +
     "            </div>            \n" +
     "\n" +
@@ -41,6 +41,8 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "               class=\"md-primary md-raised\">\n" +
     "        <span spinner-when=\"is.saving\">Log in</span>\n" +
     "    </md-button>\n" +
+    "    \n" +
+    "    <md-button ui-sref=\"public.reg\" class=\"\">...or you can register</md-button>    \n" +
     "</md-content>\n" +
     "\n" +
     "\n" +
@@ -84,13 +86,13 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "        <div layout=\"column\">\n" +
     "            <md-input-container>\n" +
     "                <label>Username</label>\n" +
-    "                <input ng-model=\"user.username\" type=\"text\" placeholder=\"Username\" required/>\n" +
+    "                <input name=\"reg-username\" ng-model=\"user.username\" type=\"text\" required/>\n" +
     "                <interactive-hint watch=\"user.username\" execute=\"checkUsername\"></interactive-hint>\n" +
     "<!--                <span class=\"interactive-hint\">Username is already taken</span>-->\n" +
     "            </md-input-container>\n" +
     "            <md-input-container>\n" +
     "                <label>Password</label>\n" +
-    "                <input ng-model=\"user.password\" type=\"password\" placeholder=\"Username\" required/>\n" +
+    "                <input name=\"reg-password\" ng-model=\"user.password\" type=\"password\" required/>\n" +
     "            </md-input-container>\n" +
     "        </div>\n" +
     "            <div>\n" +
@@ -101,12 +103,13 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "\n" +
     "<!--    <md-divider></md-divider>-->\n" +
     "\n" +
-    "            <div>\n" +
+    "            <div layout=\"row\">\n" +
     "                <md-button ng-click=\"save()\" \n" +
     "                           ng-disabled=\"regform.$invalid\"\n" +
     "                           class=\"md-primary md-raised\">\n" +
     "                    <span spinner-when=\"is.saving\">Register</span>\n" +
     "                </md-button>\n" +
+    "                <md-button ui-sref=\"public.login\" class=\"\">...or log in</md-button>\n" +
     "            </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -248,21 +251,26 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('/static/ngapp/app/scripts/tag/templates/list.html',
     "<div>\n" +
-    "    \n" +
-    "    <md-tabs>\n" +
-    "        <md-tab label=\"<span class='fa fa-arrow-circle-o-down'></span>\">\n" +
-    "            <md-content class=\"md-padding\">\n" +
-    "                <tags-list-filtered tags=\"expenses\"/>\n" +
-    "            </md-content>\n" +
-    "        </md-tab>      \n" +
-    "            \n" +
-    "        <md-tab label=\"<span class='fa fa-arrow-circle-o-up'></span>\">\n" +
-    "            <md-content class=\"md-padding\">\n" +
-    "                <tags-list-filtered tags=\"incomes\"/>\n" +
-    "            </md-content>\n" +
-    "        </md-tab>      \n" +
+    "    <md-tabs md-dynamic-height md-center-tabs=\"false\">\n" +
+    "        <md-tab>\n" +
+    "            <md-tab-label>\n" +
+    "                <span class=\"fa fa-arrow-circle-o-down\"></span>\n" +
+    "            </md-tab-label>\n" +
+    "            <md-tab-body class=\"md-padding\">\n" +
+    "                <tags-list-filtered tags=\"expenses\" />\n" +
+    "            </md-tab-body>\n" +
+    "        </md-tab>\n" +
+    "\n" +
+    "        <md-tab>\n" +
+    "            <md-tab-label>\n" +
+    "                <span class=\"fa fa-arrow-circle-o-up\"></span>\n" +
+    "            </md-tab-label>\n" +
+    "            <md-tab-body class=\"md-padding\">\n" +
+    "                <tags-list-filtered tags=\"incomes\" />\n" +
+    "            </md-tab-body>\n" +
+    "        </md-tab>\n" +
     "    </md-tabs>\n" +
-    "            \n" +
+    "\n" +
     "</div>"
   );
 
@@ -322,7 +330,7 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "                <div class=\"sum-input\">\n" +
     "                    <md-input-container>\n" +
     "                        <label>Amount</label>\n" +
-    "                        <input name=\"ta_date\" ng-model=\"transaction.size\" type=\"text\" placeholder=\"How much?\" ng-pattern=\"/\\d+/\" required/>\n" +
+    "                        <input name=\"ta_date\" ng-model=\"transaction.size\" type=\"text\" ng-pattern=\"/\\d+/\" required/>\n" +
     "                    </md-input-container>\n" +
     "                    \n" +
     "                    <tm-numpad></tm-numpad>\n" +
@@ -366,14 +374,15 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "                       ng-click=\"transaction.tag = tag.id\">{{::tag.text}}</md-button>\n" +
     "            </div>\n" +
     "        </md-content>\n" +
-    "        <md-content style=\"position: relative; padding-right: 50px; width: 30rem\">\n" +
+    "        <md-content class=\"new-tag-form\">\n" +
     "            <md-input-container flex>\n" +
     "                    <label ng-show=\"tags.length > 0\">...or type here a new tag</label>\n" +
     "                    <label ng-show=\"tags.length < 1\">There is no tags yet, so type here a new one:</label>\n" +
-    "                    <input ng-model=\"newTagText\" type=\"text\" placeholder=\"tag's text\" on-enter=\"addTag()\" />\n" +
+    "                    <input ng-model=\"newTagText\" type=\"text\" on-enter=\"addTag()\" />\n" +
     "            </md-input-container>        \n" +
-    "            <div style=\"position: absolute; top: 28px; right: 0\">\n" +
-    "                <md-button aria-label=\"Добавить метку\" \n" +
+    "            <div class=\"inline-ok\">\n" +
+    "                <md-button style=\"min-width: auto\"\n" +
+    "                           aria-label=\"Добавить метку\" \n" +
     "                           ng-disabled=\"!newTagText || newTagText.length < 1\"\n" +
     "                           ng-click=\"addTag()\">\n" +
     "                    <span class=\"fa fa-check\"></span>\n" +
@@ -466,19 +475,19 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "<div class=\"transactions-list\" layout=\"row\">\n" +
     "<div flex-sm=\"100\" flex-md=\"100\" flex-lg=\"80\" flex-gt-lg=\"50\">\n" +
     "    \n" +
-    "<div layout=\"column\" layout-gt-md=\"row\" layout-align=\"center center\" layout-fill style=\"padding: 0 0.4rem;\">\n" +
-    "        <div flex style=\"text-align: center;\">\n" +
-    "            <md-button class=\"md-fab md-raised md-primary\" aria-label=\"new transaction\" ui-sref=\"{{::addButtonUrl}}\">\n" +
-    "                <span class=\"fa fa-plus\" />\n" +
-    "            </md-button>                \n" +
-    "        </div>    \n" +
-    "    <div flex ng-show=\"transactions.length > 0\">\n" +
+    "<div layout=\"column\" layout-gt-md=\"row\" layout-align-md=\"center center\" layout-fill style=\"padding: 0 0.4rem;\">\n" +
+    "    <div flex style=\"text-align: center; max-width: 4rem;\">\n" +
+    "        <md-button class=\"md-fab md-raised md-primary\" aria-label=\"new transaction\" ui-sref=\"{{::addButtonUrl}}\">\n" +
+    "            <span class=\"fa fa-plus\" />\n" +
+    "        </md-button>                \n" +
+    "    </div>    \n" +
+    "    <div flex>\n" +
     "        <transaction-period-filter list=\"transactions\"></transaction-period-filter>\n" +
     "    </div>\n" +
     "</div>    \n" +
     "    \n" +
-    "<div layout=\"row\" layout-align=\"center center\" ng-show=\"transactions.length < 1\" style=\"margin-top: 2rem;\">\n" +
-    "    List is empty. You can log something with the button above.\n" +
+    "<div layout=\"row\" layout-align-md=\"center center\" ng-show=\"transactions.length < 1\" style=\"margin-top: 2rem;\">\n" +
+    "    List is empty. You can log something or select another month.\n" +
     "</div>    \n" +
     "    \n" +
     "<div layout=\"column\">\n" +
@@ -514,23 +523,23 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('/static/ngapp/app/scripts/transaction/templates/numpad.html',
-    "<div class=\"numpad\">\n" +
-    "    <div class=\"numpad-row\">\n" +
+    "<div class=\"numpad\" layout=\"column\">\n" +
+    "    <div class=\"numpad-row\" layout=\"row\">\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(1)\" tabindex=\"-1\">1</md-button>\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(2)\" tabindex=\"-1\">2</md-button>\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(3)\" tabindex=\"-1\">3</md-button>\n" +
     "    </div>\n" +
-    "    <div class=\"numpad-row\">\n" +
+    "    <div class=\"numpad-row\" layout=\"row\">\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(4)\" tab-index=\"-1\">4</md-button>\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(5)\">5</md-button>\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(6)\">6</md-button>\n" +
     "    </div>\n" +
-    "    <div class=\"numpad-row\">\n" +
+    "    <div class=\"numpad-row\" layout=\"row\">\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(7)\">7</md-button>\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(8)\">8</md-button>\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(9)\">9</md-button>\n" +
     "    </div>\n" +
-    "    <div class=\"numpad-row\">\n" +
+    "    <div class=\"numpad-row\" layout=\"row\">\n" +
     "        <md-button class=\"md-raised\" type=\"button\" ng-click=\"appendDigit(0)\">0</md-button>\n" +
     "        <md-button class=\"md-raised backspace\" type=\"button\" aria-label=\"backspace\" ng-click=\"appendDigit(null)\">\n" +
     "            <span class=\"fa fa-arrow-left\" />\n" +
@@ -579,7 +588,7 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "<!--                <span ng-show=\"type === 'in'\">Here will be incomes statistics. When you log some incomes.</span>-->\n" +
     "            </div>    \n" +
     "\n" +
-    "            <md-tabs  md-border-bottom ng-show=\"transactions.length > 0\">\n" +
+    "            <md-tabs md-dynamic-height md-border-bottom ng-show=\"transactions.length > 0\">\n" +
     "                <md-tab label=\"<span class='fa fa-pie-chart'></span>\">\n" +
     "                    <md-content class=\"md-padding\">\n" +
     "                         <highchart id=\"stats-pie-chart\" config=\"pieChartConfig\"></highchart>\n" +

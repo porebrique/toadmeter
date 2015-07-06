@@ -4,8 +4,8 @@
     
     var mdl = ng.module('AuthModule');
 
-    mdl.factory('Auth', ['$http', '$rootScope', '$cookieStore', '$state', '$timeout', '$localStorage', '$mdToast', '$animate',
-        function ($http, $rootScope, $cookieStore, $state, $timeout, $localStorage, $mdToast, $animate) {
+    mdl.factory('Auth', ['$http', '$rootScope', '$cookieStore', '$state', '$timeout', '$localStorage', '$mdToast',
+        function ($http, $rootScope, $cookieStore, $state, $timeout, $localStorage, $mdToast) {
 //            console.log('auth service');
             var storage,
                 desiredState = null;
