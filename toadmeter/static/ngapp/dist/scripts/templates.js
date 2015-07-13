@@ -19,11 +19,16 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "                </md-input-container>\n" +
     "            </div>            \n" +
     "\n" +
+    "            <div layout=\"row\" style=\"font-size: 0.8rem; margin-top: -1.4rem; opacity: 0.5; font-style: italic;\">\n" +
+    "                <p>You can also enter demo/demo as as login/password to log in as read-only demo user.</p>\n" +
+    "            </div>\n" +
+    "        \n" +
+    "        \n" +
     "            <div layout=\"row\" style=\"margin: 0 0 1rem 0\">\n" +
     "                <md-checkbox style=\"margin-lefT: 0; margin-top: 0;\" ng-model=\"user.rememberme\" class=\"md-primary\" aria-label=\"User is staff\">Remember me</md-checkbox>\n" +
     "            </div>\n" +
     "        \n" +
-    "\n" +
+    "            \n" +
     "    </div>\n" +
     "    \n" +
     "\n" +
@@ -43,6 +48,8 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "    </md-button>\n" +
     "    \n" +
     "    <md-button ui-sref=\"public.reg\" class=\"\">...or you can register</md-button>    \n" +
+    "    \n" +
+    "    \n" +
     "</md-content>\n" +
     "\n" +
     "\n" +
@@ -158,6 +165,8 @@ angular.module('Toadmeter').run(['$templateCache', function($templateCache) {
     "    <div ng-hide=\"auth.isLogged\">\n" +
     "        <p style=\"font-style: italic\">\n" +
     "            To use toadmeter you have to register, but it is simple, just username and password.\n" +
+    "            <br/>\n" +
+    "            You can also log in as read-only demo user.\n" +
     "        </p>\n" +
     "        <md-button ui-sref=\"public.login\" class=\"md-raised md-primary\">Log in</md-button>\n" +
     "        <md-button ui-sref=\"public.reg\" class=\"md-raised\">Registration</md-button>\n" +
