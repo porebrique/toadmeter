@@ -45,6 +45,7 @@ body p {
 
 .md-button .fa {
     font-size: 1.4rem;
+    display: block;
 }
 
 .md-fab .fa {
@@ -180,6 +181,10 @@ button .spinner .fa {
 }
 .tm-table td:last-child {
     padding-right: 0;
+}
+
+.tm-table .md-button {
+    min-width: auto;
 }
 /*--------------------*/
 .error {
