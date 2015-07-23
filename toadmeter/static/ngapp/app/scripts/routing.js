@@ -54,6 +54,9 @@
                 url: 'login',
 //                templateUrl: tmpl('auth', 'login')
                 template: '<auth-login/>',
+                params: {
+                    demo: null
+                },
                 data: {
                     pageName: 'Login'
                 }

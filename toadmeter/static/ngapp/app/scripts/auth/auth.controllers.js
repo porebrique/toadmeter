@@ -17,8 +17,8 @@
             
         }]);
     
-    mdl.controller('auth.LoginCtrl', ['$scope', '$location', '$state', 'Auth',
-        function ($scope, $location, $state, Auth) {
+    mdl.controller('auth.LoginCtrl', ['$scope', '$location', '$state', '$stateParams', 'Auth',
+        function ($scope, $location, $state, $stateParams, Auth) {
             
             $scope.is = {
                 saving: false
@@ -27,6 +27,15 @@
             $scope.user = {
             };
             
+//            console.log($state);
+            console.log($stateParams);
+            if ($stateParams.demo) {
+                $scope.user = {
+                    username: 'demo',
+                    password: 'demo'
+                };
+                $scope.isDemoUser = true;
+            }
 
             $scope.login = function () {
                 $scope.is.saving = true;

@@ -28,8 +28,9 @@
                 if (tag.$isEdited) {
                     tag
                         .$save(['text'])
-                    console.log(tag);
+                        console.log(tag);
                         tag.$then(function (response) {
+                            
                             tag.$isEdited = false;
                         })
                         .$catch(function (error) {

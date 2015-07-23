@@ -15,7 +15,8 @@
                 </md-input-container>
             </div>            
 
-            <div layout="row" style="font-size: 0.8rem; margin-top: -1.4rem; opacity: 0.5; font-style: italic;">
+            <div layout="row" 
+                 style="font-size: 0.8rem; margin-top: -1.4rem; opacity: 0.5; font-style: italic;">
                 <p>You can also enter demo/demo as as login/password to log in as read-only demo user.</p>
             </div>
         
@@ -35,15 +36,19 @@
     <div class="error">{{error}}</div>
 </div>
 
+    
 <md-content layout="row">
     <md-divider></md-divider>
     <md-button ng-click="save()" 
                ng-disabled="loginform.$invalid"
                class="md-primary md-raised">
-        <span spinner-when="is.saving">Log in</span>
+        <span spinner-when="is.saving">
+            Log in <span ng-show="isDemoUser">as read-only demo user</span>
+        </span>
     </md-button>
     
-    <md-button ui-sref="public.reg" class="">...or you can register</md-button>    
+    <md-button ui-sref="public.reg" 
+               class="">...or you can register</md-button>    
     
     
 </md-content>
