@@ -13,6 +13,7 @@ from toadmeter.api.users import UserSerializer
 #from rest_framework.response import Response
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
 
+@csrf_exempt
 def reg_view(request):
     data = json.loads(request.body)
     username = data['username']
